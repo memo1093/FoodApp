@@ -12,5 +12,11 @@ namespace foodapp.data.Concrete.EfCore
         {
             optionsBuilder.UseMySql("Data Source=foodDb");
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<ProductCategory>()
+                        .HasKey(c=>new{c.CategoryId,c.ProductId});
+            
+        }
     }
 }

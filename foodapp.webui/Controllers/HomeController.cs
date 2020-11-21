@@ -6,17 +6,23 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using foodapp.webui.Models;
+using foodapp.data.Abstract;
 
 namespace foodapp.webui.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        
+        private IProductRepository _productRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+
+
+        public HomeController(IProductRepository productRepository)
         {
-            _logger = logger;
+            this._productRepository=productRepository;
         }
+
+        
 
         public IActionResult Index()
         {

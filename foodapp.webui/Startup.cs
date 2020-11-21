@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using foodapp.data.Abstract;
+using foodapp.data.Concrete.EfCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,6 +20,9 @@ namespace foodapp.webui
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IProductRepository,EfCoreProductRepository>();
+            services.AddScoped<ICategoryRepository,EfCoreCategoryRepository>();
+
             services.AddControllersWithViews();
         }
 
