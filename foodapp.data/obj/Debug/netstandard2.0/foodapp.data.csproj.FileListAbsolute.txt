@@ -1,0 +1,12 @@
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.data\bin\Debug\netstandard2.0\foodapp.data.deps.json
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.data\bin\Debug\netstandard2.0\foodapp.data.dll
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.data\bin\Debug\netstandard2.0\foodapp.data.pdb
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.data\bin\Debug\netstandard2.0\foodapp.entity.dll
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.data\bin\Debug\netstandard2.0\foodapp.entity.pdb
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.data\obj\Debug\netstandard2.0\foodapp.data.csprojAssemblyReference.cache
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.data\obj\Debug\netstandard2.0\foodapp.data.AssemblyInfoInputs.cache
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.data\obj\Debug\netstandard2.0\foodapp.data.AssemblyInfo.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.data\obj\Debug\netstandard2.0\foodapp.data.csproj.CoreCompileInputs.cache
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.data\obj\Debug\netstandard2.0\foodapp.data.csproj.CopyComplete
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.data\obj\Debug\netstandard2.0\foodapp.data.dll
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.data\obj\Debug\netstandard2.0\foodapp.data.pdb
