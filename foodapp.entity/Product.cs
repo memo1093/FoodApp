@@ -9,6 +9,7 @@ namespace foodapp.entity
         public double Price { get; set; }
         public bool IsApproved { get; set; }
         public int CategoryId { get; set; }
+        public string ImageUrl { get; set; }
         
         public List<ProductCategory> ProductCategories{get; set;}
     }
