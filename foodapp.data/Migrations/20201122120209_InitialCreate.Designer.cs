@@ -8,7 +8,7 @@ using foodapp.data.Concrete.EfCore;
 namespace foodapp.data.Migrations
 {
     [DbContext(typeof(FoodContext))]
-    [Migration("20201121180219_InitialCreate")]
+    [Migration("20201122120209_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
