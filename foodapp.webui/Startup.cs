@@ -31,6 +31,7 @@ namespace foodapp.webui
         {
             if (env.IsDevelopment())
             {
+                app.UseStaticFiles();
                 app.UseDeveloperExceptionPage();
             }
             else

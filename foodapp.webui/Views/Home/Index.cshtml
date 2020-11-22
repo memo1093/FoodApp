@@ -1,8 +1,10 @@
 ﻿@{
     Layout="_Layout";
-    var categories = Model.categories;
+    
 }
 
+@await Html.PartialAsync("_navbar")
+@await Html.PartialAsync("_header")
 
 
 <div class="why bg-success p-3" id="why">

@@ -25,7 +25,7 @@ body{
 .jumbotron{
    
   
-  background-image:linear-gradient(to left bottom,rgba(154, 255, 188, 0.247),rgba(106, 192, 135, 0.582)),url(img/bazlama-statue2.jpg);
+  background-image:linear-gradient(to left bottom,rgba(154, 255, 188, 0.247),rgba(106, 192, 135, 0.582)),url(../img/bazlamaheader.jpg);
   
   background-size: cover;
   background-position:50% 30%;
