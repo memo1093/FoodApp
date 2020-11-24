@@ -1,0 +1,130 @@
+﻿html,body{
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+  
+      
+}
+html{
+  scroll-behavior: smooth;
+}
+body{
+  position: relative;
+  
+}
+
+@media screen and (max-width:700px){
+  
+  
+}
+
+
+/*jumbotron*/
+.jumbotron{
+   
+  
+  background-image:linear-gradient(to left bottom,rgba(154, 255, 188, 0.247),rgba(106, 192, 135, 0.582)),url(../img/bazlamaheader.jpg);
+  
+  background-size: cover;
+  background-position:50% 30%;
+  
+  
+  height: 42rem;
+  
+  
+}
+
+#leadText{
+  text-align: left;
+  margin-top: 20rem!important;
+}
+@media screen and (min-width:700px){
+  .jumbotron{
+      height: 55rem;
+      background-position: 50% 40%;
+  }
+  .display-4{
+      font-size: 4rem;
+  }
+  #leadText{
+      margin-top: 25rem!important;
+      font-size: 2rem;
+  }
+}
+
+
+
+
+
+/*product-cards*/
+.img-overlay{
+  position: absolute;
+  background: yellowgreen;
+  color: #f1f1f1;
+  height: 100%;
+  width: 100%;
+  opacity: 0.2;
+  color: #0000;
+  transition: all 0.5s ease;
+  
+}
+
+
+.product-card{
+  position: relative;    
+  opacity: 1;
+  background-size: 100% 100%;
+  max-width: 600px;
+  height: auto;
+  
+  
+  
+
+}
+.product-card h5{
+  font-size: 2.5rem!important;
+  opacity: 1;
+  
+}
+.product-card img{
+  height: 20rem;
+}
+@media screen and (min-width:700px){
+  .product-card img{
+  
+  
+    height: 30rem;
+  }
+}
+
+.product-card:hover .img-overlay{
+  opacity: 0;
+  
+}
+
+.product-card:hover .card-title{
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
+}
+
+
+
+
+/*Why I should buy?*/
+.why h3{
+  font-size:3rem;
+  line-height: 3rem;
+}
+.why p{
+  font-size:1.5rem;
+  line-height: 2rem;
+}
+@media screen and (max-width:900px){
+  .why p{
+      
+      line-height: 3rem;
+  }
+}
+
+

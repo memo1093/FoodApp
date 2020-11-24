@@ -1,8 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model ProductViewModel
+@{
+    Layout="_Layout";
+    var categories = Model.Categories;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@await Html.PartialAsync("_navbar")
+@await Html.PartialAsync("_header")
+
+<div class="row justify-content-md-center no-gutters" id="products">
+@foreach (var category in categories)
+{
+    <div class="col-lg-3 col-sm-6 mb-0 no-gutters">
+        @await Html.PartialAsync("_categories",category)
+    </div>
+    
+}
 </div>
+
+
+<div class="why bg-success p-3" id="why">
+
+<h3 class="text-white text-left my-4 title ">Neden Almalıyım?</h3>
+<p class="text-white text-md-left text-sm-left ">Kızılcahamam,
+    Ankara'nın kuzey
+    batısında bulunan hamurişi kültürü (Bazlama, Gözleme
+    vs.) ile meşhur bir ilçesidir. Türkiye'nin çeşitli
+    yerlerinden gelerek bu hamurişlerini evlerine götüren
+    birçok insan var. Bu güzelliklerden mahrum kalmaman
+    adına memleketinde yapılıp evine teslim edilecek olan bu
+    hamurişleri için hemen almalısın. Buraya gelmene gerek
+    yok, bir bazlama bir tık ötende...</p>
+
+
+</div>
+
+

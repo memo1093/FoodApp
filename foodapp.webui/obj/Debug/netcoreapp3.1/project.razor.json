@@ -14402,6 +14402,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Shared\\_header.cshtml",
+      "TargetPath": "Views\\Shared\\_header.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Shared\\_footer.cshtml",
+      "TargetPath": "Views\\Shared\\_footer.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
       "FileKind": "mvc"
@@ -14417,8 +14427,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Shared\\_navbar.cshtml",
+      "TargetPath": "Views\\Shared\\_navbar.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Shared\\_categories.cshtml",
+      "TargetPath": "Views\\Shared\\_categories.cshtml",
       "FileKind": "mvc"
     },
     {
