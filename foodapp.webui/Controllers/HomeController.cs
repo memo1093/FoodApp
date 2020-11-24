@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using foodapp.webui.Models;
 using foodapp.data.Abstract;
+using foodapp.webui.ViewModel;
+using foodapp.data.Concrete.EfCore;
 
 namespace foodapp.webui.Controllers
 {
@@ -14,19 +16,24 @@ namespace foodapp.webui.Controllers
     {
         
         private IProductRepository _productRepository;
+        private ICategoryRepository _categoryRepository;
 
 
 
-        public HomeController(IProductRepository productRepository)
+        public HomeController(IProductRepository productRepository,ICategoryRepository categoryRepository)
         {
             this._productRepository=productRepository;
+            this._categoryRepository = categoryRepository;
         }
-
-        
 
         public IActionResult Index()
         {
-            return View();
+            var productViewModel = new ProductViewModel(){
+                Products = _productRepository.GetAll(),
+                Categories = _categoryRepository.GetAll()
+                
+            };
+            return View(productViewModel);
         }
 
         public IActionResult Privacy()

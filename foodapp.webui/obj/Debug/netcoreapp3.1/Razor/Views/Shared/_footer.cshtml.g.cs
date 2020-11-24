@@ -33,8 +33,15 @@ using foodapp.entity;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\Views\_ViewImports.cshtml"
+using foodapp.webui.ViewModel;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c9a5d17176c17b53ea4dc2246e736ccd474d8684", @"/Views/Shared/_footer.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ddb72e6623c1e8ee7874f566bc4bc408abb1a8e0", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d70fc1e2605a7d06a12232f21fb59c99b3cde54d", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__footer : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

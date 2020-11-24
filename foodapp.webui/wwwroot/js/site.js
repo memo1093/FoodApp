@@ -2,3 +2,11 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+var x = window.matchMedia("(max-width: 700px)");
+if (x.matches) {
+    $("#hideOnSmall").hide(); 
+}
+
+
+
+  

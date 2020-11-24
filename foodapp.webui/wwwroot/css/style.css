@@ -3,6 +3,7 @@
   margin: 0px;
   padding: 0px;
   overflow-x: hidden;
+  
       
 }
 html{
@@ -17,8 +18,6 @@ body{
   
   
 }
-
-
 
 
 /*jumbotron*/
@@ -84,13 +83,19 @@ body{
 
 }
 .product-card h5{
-  font-size: 1.8rem;
+  font-size: 2.5rem!important;
   opacity: 1;
+  
 }
 .product-card img{
-  width: 100%!important;
+  height: 20rem;
+}
+@media screen and (min-width:700px){
+  .product-card img{
   
-  height: 15rem;
+  
+    height: 30rem;
+  }
 }
 
 .product-card:hover .img-overlay{
@@ -104,14 +109,7 @@ body{
 }
 
 
-.card-img-overlay{
-  
-  font-weight: 700px;
-  font-size: 4rem;
-  
-  opacity: 0.8;
-  
-}
+
 
 /*Why I should buy?*/
 .why h3{

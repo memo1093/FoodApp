@@ -1,15 +1,26 @@
-﻿@{
+﻿@model ProductViewModel
+@{
     Layout="_Layout";
-    
+    var categories = Model.Categories;
 }
 
 @await Html.PartialAsync("_navbar")
 @await Html.PartialAsync("_header")
 
+<div class="row justify-content-md-center no-gutters" id="products">
+@foreach (var category in categories)
+{
+    <div class="col-lg-3 col-sm-6 mb-0 no-gutters">
+        @await Html.PartialAsync("_categories",category)
+    </div>
+    
+}
+</div>
+
 
 <div class="why bg-success p-3" id="why">
 
-<h3 class="text-white text-left mb-4 title ">Neden Almalıyım?</h3>
+<h3 class="text-white text-left my-4 title ">Neden Almalıyım?</h3>
 <p class="text-white text-md-left text-sm-left ">Kızılcahamam,
     Ankara'nın kuzey
     batısında bulunan hamurişi kültürü (Bazlama, Gözleme
