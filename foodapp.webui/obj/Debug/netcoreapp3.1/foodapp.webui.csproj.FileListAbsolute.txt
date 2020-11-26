@@ -69,3 +69,4 @@ C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\foodapp.business.dll
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\foodapp.business.pdb
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_products.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_noproducts.cshtml.g.cs

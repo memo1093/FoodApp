@@ -2,16 +2,46 @@
 @{
     Layout="_Layout";
     var categories = Model.Categories;
+    var products = Model.Products;
 }
 
 @await Html.PartialAsync("_navbar")
 @await Html.PartialAsync("_header")
 
-<div class="row justify-content-md-center no-gutters" id="products">
+<div class="row justify-content-md-center no-gutters bg-light" id="products">
 @foreach (var category in categories)
 {
     <div class="col-lg-3 col-sm-6 mb-0 no-gutters">
         @await Html.PartialAsync("_categories",category)
+        <div class="collapse multi-collapse bg-light my-4"
+                        id="collapsable-@category.CategoryId">
+
+                        <form action="">
+                            
+                            @foreach (var product in products)
+                            {
+                                @if (products.Count()==0)
+                                {
+                                    @await Html.PartialAsync("_noproduct");
+                                }
+                                @if (product.CategoryId==category.CategoryId)
+                                {
+                                    @await Html.PartialAsync("_products",product);
+                                }
+                                
+                                
+                                                               
+                            }
+
+                           <div class="row justify-content-md-center">
+                               <div class="col-auto">
+                                   <button class="btn btn-outline-info float-right my-2"
+                             asp-controller="shop" asp-action="addtocart">Sepete Ekle</button>
+                               </div>
+                           </div>
+                            
+                        </form>
+                    </div>
     </div>
     
 }
