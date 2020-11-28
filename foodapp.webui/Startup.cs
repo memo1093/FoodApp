@@ -24,7 +24,9 @@ namespace foodapp.webui
         {
             services.AddScoped<IProductRepository,EfCoreProductRepository>();
             services.AddScoped<ICategoryRepository,EfCoreCategoryRepository>();
+
             services.AddScoped<IProductService,ProductManager>();
+            services.AddScoped<ICategoryService,CategoryManager>();
 
             services.AddControllersWithViews();
         }
@@ -50,6 +52,35 @@ namespace foodapp.webui
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseEndpoints(endpoint=>
+            {
+                
+                endpoint.MapControllerRoute(
+                    name:"adminproductlist",
+                    pattern:"admin/products",
+                    defaults:new {controller="Admin",action="ProductList"}
+                );
+            });
+            app.UseEndpoints(endpoint=>
+            {
+                
+                endpoint.MapControllerRoute(
+                    name:"admincreateproduct",
+                    pattern:"admin/create",
+                    defaults:new {controller="Admin",action="Createproduct"}
+                );
+            });
+
+            app.UseEndpoints(endpoint=>
+            {
+                
+                endpoint.MapControllerRoute(
+                    name:"products",
+                    pattern:"products",
+                    defaults:new {controller="Shop",action="list"}
+                );
+            });
 
             app.UseEndpoints(endpoints =>
             {

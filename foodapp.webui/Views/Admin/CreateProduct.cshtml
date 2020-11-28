@@ -1,0 +1,33 @@
+@{
+    Layout = "_Layout";
+}
+@model ProductModel
+
+
+@await Html.PartialAsync("_navbar2")
+
+
+
+<hr>
+
+<form asp-controller="Admin" asp-action="CreateProduct" method="POST">
+    <div class="container">
+        <h1 class="h3">Create Product</h1>
+    <div class="form-group row">
+        <label asp-for="Name" class="col-sm-2 col-form-label mb-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="Name" type="text" class="form-control" placeholder="Ürün Adı">
+        </div>
+        <label asp-for="Price" class="col-sm-2 col-form-label mb-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="Price" type="text" class="form-control" placeholder="0 &#8378">
+        </div>
+        <label asp-for="ImageUrl" class="col-sm-2 col-form-label mb-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="ImageUrl" type="text" class="form-control" placeholder="11.jpg">
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Ürünü Kaydet</button>
+    </div>
+
+</form>

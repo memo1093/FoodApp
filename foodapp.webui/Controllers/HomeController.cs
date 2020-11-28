@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using foodapp.webui.Models;
-using foodapp.data.Abstract;
-using foodapp.webui.ViewModel;
-using foodapp.data.Concrete.EfCore;
 using foodapp.business.Abstract;
 
 namespace foodapp.webui.Controllers
@@ -17,21 +9,21 @@ namespace foodapp.webui.Controllers
     {
         
         private IProductService _productService;
-        private ICategoryRepository _categoryRepository;
+        private ICategoryService _categoryService;
 
 
 
-        public HomeController(IProductService productService,ICategoryRepository categoryRepository)
+        public HomeController(IProductService productService,ICategoryService categoryService)
         {
             this._productService=productService;
-            this._categoryRepository = categoryRepository;
+            this._categoryService = categoryService;
         }
 
         public IActionResult Index()
         {
             var productViewModel = new ProductViewModel(){
                 Products = _productService.GetAll(),
-                Categories = _categoryRepository.GetAll()
+                Categories = _categoryService.GetAll()
                 
             };
             return View(productViewModel);

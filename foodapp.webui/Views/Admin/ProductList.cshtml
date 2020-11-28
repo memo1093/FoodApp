@@ -1,0 +1,80 @@
+@model ProductViewModel
+
+@{
+    Layout = "_Layout";
+    var categories = Model.Categories;
+    var products = Model.Products;
+}
+
+
+@await Html.PartialAsync("_navbar2")
+<div class="row">
+    <div class="col-md-12">
+        <h1>Ürün Listesi</h1>
+        <hr>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Resim Url'si</th>
+                    <th scope="col">İsim</th>
+                    <th scope="col">Fiyat</th>
+                    <th scope="col">Onaylı mı?</th>
+                    <th scope="col">Kategorisi</th>
+                    <th scope="col">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (products.Count()<=0)
+                {
+                   @await Html.PartialAsync("_noproducts");
+                }
+                @foreach (var product in products)
+                {
+                    <tr>
+                    <th scope="row">@product.ProductId</th>
+                    <td><img src="~/img/Products/@product.ImageUrl" class="img-thumbnail" style="max-width: 200px; max-height:200px;" alt=""></td>
+                    <td>@product.Name</td>
+                    <td>@product.Price &#8378</td>
+                    <td>
+                        @if (@product.IsApproved)
+                        {
+                           <i class="far fa-2x fa-check-circle text-success"></i>
+                        }else{
+                            <i class="far fa-2x fa-times-circle text-danger"></i>
+                        }
+                        </td>
+                    <td>
+                        @foreach (var category in categories)
+                    {
+                        @if (category.CategoryId==product.CategoryId)
+                        {
+                            <p>@category.Name</p>
+                        }
+                        
+                    }
+                    </td>
+                    <td class="btn-group"> 
+                        <button type="button" class="btn btn-primary">Düzenle</button>
+                        <button type="button" class="btn btn-warning">Onayla/Onay Kaldır</button>
+                        <button type="button" class="btn btn-danger">Sil</button>
+                    </td>
+                    </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><button type="button" class="btn btn-info">Yeni ürün ekle</button></td>
+                </tr>
+                    
+                
+                
+            </tbody>
+            
+        </table>
+    </div>
+</div>

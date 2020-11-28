@@ -1,0 +1,30 @@
+@model ProductViewModel
+@{
+    Layout = "_Layout";
+    var categories = Model.Categories;
+    var products = Model.Products;
+}
+
+@await Html.PartialAsync("_navbar2")
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9">foreach
+            SelectedProducts ||  - Quantity + || Add
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Sipariş Listesi
+                    </h4>
+                    <p class="card-text"> foreach Selected Products</p>
+                    
+                </div>
+                <div class="card-footer">
+                    <h4 class="card-title">Total Price:20TL</h4>
+                    <button asp-controller="Shop" asp-action="Details" class="btn btn-outline-info">Alışverişi Tamamla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

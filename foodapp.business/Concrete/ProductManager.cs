@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using foodapp.business.Abstract;
 using foodapp.data.Abstract;
-using foodapp.data.Concrete.EfCore;
 using foodapp.entity;
 
 namespace foodapp.business.Concrete
@@ -34,9 +33,15 @@ namespace foodapp.business.Concrete
            return _productRepository.GetById(id);
         }
 
+        public List<Product> GetProductsByCategory(string name)
+        {
+            return _productRepository.GetProductsByCategory(name);
+        }
+
         public void Update(Product entity)
         {
             _productRepository.Update(entity);
         }
+        
     }
 }
