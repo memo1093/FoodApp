@@ -8,6 +8,17 @@ namespace foodapp.data.Concrete.EfCore
 {
     public class EfCoreProductRepository : EfCoreGenericRepository<Product, FoodContext>, IProductRepository
     {
+        public void Create(Product entity, int categoryId)
+        {
+            using (var context = new FoodContext())
+            {
+
+                context.Products.Add(entity);
+                
+                context.SaveChanges();
+            }
+        }
+
         public List<Product> GetProductsByCategory(string name)
         {
             using (var context = new FoodContext())
@@ -22,6 +33,27 @@ namespace foodapp.data.Concrete.EfCore
                                         
                 }
                 return products.ToList();
+            }
+        }
+
+        public void Update(Product entity, int categoryId)
+        {
+            using (var context = new FoodContext())
+            {
+                var product = context.Products
+                                                .Include(i=>i.ProductCategories)
+                                                .FirstOrDefault(i=>i.ProductId==entity.ProductId);
+
+               if (product!=null)
+               {
+                   product.Name= entity.Name;
+                   product.Price = entity.Price;
+                   product.ImageUrl = entity.ImageUrl;
+
+                   product.CategoryId=categoryId;
+               }
+               context.SaveChanges();
+
             }
         }
     }

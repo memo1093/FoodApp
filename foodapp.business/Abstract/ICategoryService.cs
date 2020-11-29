@@ -8,9 +8,11 @@ namespace foodapp.business.Abstract
         Category GetById(int id);
         List<Category> GetAll();
         List<Category> GetCategoryByProductName(string name);
-        void Create(Category entity);
-        void Update(Category entity);
+        Category GetByIdWithProducts(int id);
         void Delete(Category entity);
+
+        void Update(Category entity);
+        void Create(Category entity);
 
 
         

@@ -25,7 +25,7 @@
                                 {
                                     @await Html.PartialAsync("_noproduct");
                                 }
-                                @if (product.CategoryId==category.CategoryId)
+                                @if (product.CategoryId==category.CategoryId && product.IsApproved)
                                 {
                                      @await Html.PartialAsync("_products",product);
                                 }

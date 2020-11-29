@@ -1,0 +1,52 @@
+@{
+    Layout = "_Layout";
+}
+@model ProductModel
+
+
+@await Html.PartialAsync("_navbar2")
+
+
+
+<hr>
+
+
+<form asp-controller="admin" asp-action="Editproduct" method="POST">
+    <input type="hidden" name="ProductId" value="@Model.ProductId">
+    <div class="container">
+        <h1 class="h3">Edit Product</h1>
+        <div class="form-group row">
+            <label asp-for="Name" class="col-sm-2 col-form-label mb-2"></label>
+            <div class="col-sm-10">
+                <input asp-for="Name" type="text" class="form-control"
+                    placeholder="Ürün Adı">
+            </div>
+            <label asp-for="Price" class="col-sm-2 col-form-label mb-2"></label>
+            <div class="col-sm-10">
+                <input asp-for="Price" type="text" class="form-control"
+                    placeholder="0 &#8378">
+            </div>
+            <label asp-for="ImageUrl"
+                class="col-sm-2 col-form-label mb-2"></label>
+            <div class="col-sm-10">
+                <input asp-for="ImageUrl" type="text" class="form-control"
+                    placeholder="11.jpg">
+            </div>
+        </div>
+        @foreach (var category in (@List<Category>)ViewBag.Categories)
+        {
+            <div class="custom-control custom-checkbox">
+                    <input type="checkbox" 
+                    class="custom-control-input" 
+                    name="categoryIds"
+                    value="@category.CategoryId"
+                    id="category-@(category.CategoryId)" 
+                    
+                    >
+                    <label class="custom-control-label" for="category-@(category.CategoryId)">@category.Name</label>
+                </div>
+        }
+        <button class="btn btn-primary" type="submit">Ürünü Kaydet</button>
+    </div>
+
+</form>

@@ -8,9 +8,12 @@
 
 
 @await Html.PartialAsync("_navbar2")
+<div class="container my-4">
 <div class="row">
     <div class="col-md-12">
         <h1>Ürün Listesi</h1>
+       @await Html.PartialAsync("_messages",false)
+        
         <hr>
         <table class="table">
             <thead class="thead-dark">
@@ -22,6 +25,7 @@
                     <th scope="col">Onaylı mı?</th>
                     <th scope="col">Kategorisi</th>
                     <th scope="col">İşlemler</th>
+                    <th scope="col"><a asp-controller="admin" asp-action="CategoryList" class="btn btn-outline-primary">Kategori işlemleri</a></th>
                 </tr>
             </thead>
             <tbody>
@@ -55,9 +59,23 @@
                     }
                     </td>
                     <td class="btn-group"> 
-                        <button type="button" class="btn btn-primary">Düzenle</button>
-                        <button type="button" class="btn btn-warning">Onayla/Onay Kaldır</button>
-                        <button type="button" class="btn btn-danger">Sil</button>
+                        <label class="btn btn-primary"><a asp-controller="admin" asp-action="Editproduct" asp-route-id="@product.ProductId" class="btn btn-primary">Düzenle</a></label>
+                        
+                        
+                        <label class="btn btn-warning"><button class="btn btn-warning" data-toggle="modal" data-target="#Modal-@product.ProductId">Onayla/Onay Kaldır</button></label>
+                        <form action="/admin/Approve" method="post">
+                        <input type="hidden" name="ProductId" value="@product.ProductId">
+                        @await Html.PartialAsync("_warning",product)
+                        </form>
+                        <label class="btn btn-danger">
+                        <form action="/admin/Deleteproduct" class="form-inline" method="POST" style="display: inline;">
+                        <input type="hidden" name="ProductId" value="@product.ProductId">
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                        
+                        </form>
+                        </label>
+
+                        
                     </td>
                     </tr>
                 }
@@ -68,7 +86,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><button type="button" class="btn btn-info">Yeni ürün ekle</button></td>
+                    <td><a asp-controller="admin" asp-action="Createproduct" class="btn btn-info">Yeni ürün ekle</a></td>
                 </tr>
                     
                 
@@ -77,4 +95,5 @@
             
         </table>
     </div>
+</div>
 </div>

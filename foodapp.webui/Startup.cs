@@ -58,8 +58,47 @@ namespace foodapp.webui
                 
                 endpoint.MapControllerRoute(
                     name:"adminproductlist",
+                    pattern:"admin/categories",
+                    defaults:new {controller="Admin",action="CategoryList"}
+                );
+            });
+
+            app.UseEndpoints(endpoint=>
+            {
+                
+                endpoint.MapControllerRoute(
+                    name:"admincreateproduct",
+                    pattern:"admin/create-category",
+                    defaults:new {controller="Admin",action="Createcategory"}
+                );
+            });
+            app.UseEndpoints(endpoint=>
+            {
+                
+                endpoint.MapControllerRoute(
+                    name:"adminproductlist",
+                    pattern:"admin/categories/{id?}",
+                    defaults:new {controller="Admin",action="Editcategories"}
+                );
+            });
+
+            app.UseEndpoints(endpoint=>
+            {
+                
+                endpoint.MapControllerRoute(
+                    name:"adminproductlist",
                     pattern:"admin/products",
                     defaults:new {controller="Admin",action="ProductList"}
+                );
+            });
+            
+            app.UseEndpoints(endpoint=>
+            {
+                
+                endpoint.MapControllerRoute(
+                    name:"adminproductlist",
+                    pattern:"admin/products/{id?}",
+                    defaults:new {controller="Admin",action="Editproduct"}
                 );
             });
             app.UseEndpoints(endpoint=>
@@ -67,7 +106,7 @@ namespace foodapp.webui
                 
                 endpoint.MapControllerRoute(
                     name:"admincreateproduct",
-                    pattern:"admin/create",
+                    pattern:"admin/create-product",
                     defaults:new {controller="Admin",action="Createproduct"}
                 );
             });

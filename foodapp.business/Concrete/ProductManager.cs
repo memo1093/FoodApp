@@ -38,10 +38,10 @@ namespace foodapp.business.Concrete
             return _productRepository.GetProductsByCategory(name);
         }
 
+
         public void Update(Product entity)
         {
             _productRepository.Update(entity);
         }
-        
     }
 }

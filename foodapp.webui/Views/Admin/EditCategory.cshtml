@@ -1,0 +1,73 @@
+@{
+    Layout = "_Layout";
+}
+@model CategoryModel
+
+
+@await Html.PartialAsync("_navbar2")
+
+
+
+<hr>
+<div class="row">
+    <div class="col-md-5">
+        <form asp-controller="admin" asp-action="Editcategory" method="POST">
+            <input type="hidden" name="CategoryId" value="@Model.CategoryId">
+            <div class="container">
+                <h1 class="h3">Edit Category</h1>
+                <div class="form-group row">
+                    <label asp-for="Name"
+                        class="col-sm-2 col-form-label mb-2"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="Name" type="text" class="form-control"
+                            placeholder="Kategori Adı">
+                    </div>
+
+                    <label asp-for="ImageUrl"
+                        class="col-sm-2 col-form-label mb-2"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="ImageUrl" type="text"
+                            class="form-control" placeholder="11.jpg">
+                    </div>
+                </div>
+
+
+                <button class="btn btn-primary" type="submit">Kategori türünü
+                    Kaydet</button>
+            </div>
+
+        </form>
+
+    </div>
+
+<div class="col-md-7">
+
+    <div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ürün Id</th>
+                <th>Ürün Resmi</th>
+                <th>Ürün adı</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in @Model.Products)
+            {
+                <tr>
+                    <td>@product.ProductId</td>
+                    <td><img src="~/img/Products/@product.ImageUrl" alt="@product.Name" style="max-width: 200px;"> </td>
+                    <td>@product.Name</td>
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+    <hr>
+
+</div>
+</div>
+
+</div>
+
+

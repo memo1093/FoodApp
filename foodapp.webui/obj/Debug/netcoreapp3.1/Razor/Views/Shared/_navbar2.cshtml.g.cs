@@ -33,8 +33,15 @@ using foodapp.entity;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\Views\_ViewImports.cshtml"
+using Newtonsoft.Json;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e0ca4a7ba5f2110b6ef397c6e94d0b56de04bdd4", @"/Views/Shared/_navbar2.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ddb72e6623c1e8ee7874f566bc4bc408abb1a8e0", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"18bf9e9adb1d89485b3a10a24404499e70586050", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__navbar2 : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "admin", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -84,7 +91,7 @@ using foodapp.entity;
                 <a href=""/"" class=""navbar-brand"">Bazlama</a>
                 <ul class=""navbar-nav"">
                     <li class=""nav-item mr-2""> ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e0ca4a7ba5f2110b6ef397c6e94d0b56de04bdd49423", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e0ca4a7ba5f2110b6ef397c6e94d0b56de04bdd49611", async() => {
                 WriteLiteral("Ürün Oluştur");
             }
             );
@@ -103,7 +110,7 @@ using foodapp.entity;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral(" </li>\r\n                    <li class=\"nav-item mr-2\"> ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e0ca4a7ba5f2110b6ef397c6e94d0b56de04bdd410928", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e0ca4a7ba5f2110b6ef397c6e94d0b56de04bdd411116", async() => {
                 WriteLiteral("Ürün Listesi");
             }
             );
@@ -122,7 +129,7 @@ using foodapp.entity;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral(" </li>\r\n                </ul>\r\n                <ul class=\"navbar-nav ml-auto\" >\r\n                    <li class=\"nav-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e0ca4a7ba5f2110b6ef397c6e94d0b56de04bdd412507", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e0ca4a7ba5f2110b6ef397c6e94d0b56de04bdd412695", async() => {
                 WriteLiteral("Anasayfa");
             }
             );
@@ -141,7 +148,7 @@ using foodapp.entity;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                    <li class=\"nav-item\"><a href=\"#products\" class=\"nav-link\">Ürünler</a>\r\n                    </li>\r\n                    <li class=\"nav-item\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e0ca4a7ba5f2110b6ef397c6e94d0b56de04bdd414182", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e0ca4a7ba5f2110b6ef397c6e94d0b56de04bdd414370", async() => {
                 WriteLiteral("Siparişlerim");
             }
             );
@@ -160,7 +167,7 @@ using foodapp.entity;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                    <li class=\"nav-item\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e0ca4a7ba5f2110b6ef397c6e94d0b56de04bdd415733", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e0ca4a7ba5f2110b6ef397c6e94d0b56de04bdd415921", async() => {
                 WriteLiteral("<i\r\n                                class=\"fas fa-shopping-cart\"></i>");
             }
             );
@@ -183,7 +190,7 @@ using foodapp.entity;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                    <li class=\"nav-item\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e0ca4a7ba5f2110b6ef397c6e94d0b56de04bdd417681", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e0ca4a7ba5f2110b6ef397c6e94d0b56de04bdd417869", async() => {
                 WriteLiteral("<i\r\n                                class=\"fas fa-user\"></i>");
             }
             );

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "QUQHUiFUJrSGgdhKoRPIB3qpsV79oOoHyEYOnP1gplLjtCqbn4g7C/lXYmyT0yh+NPOULgVnZCVVqbpW+7VJ0Q==",
+  "dgSpecHash": "EpOs7eGD7IaQwp2BPuwfK/B4bx2KyIUH2mS5yc8WlyUQ3ZSe7EdgISQJWPvzQ/vNt1CH5QoGe1woTa5gEbgrbg==",
   "success": true,
   "projectFilePath": "C:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\foodapp.webui.csproj",
   "expectedPackageFiles": [
@@ -24,7 +24,7 @@
     "C:\\Users\\pc\\.nuget\\packages\\microsoft.extensions.options\\3.1.8\\microsoft.extensions.options.3.1.8.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.8\\microsoft.extensions.primitives.3.1.8.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\mysqlconnector\\0.69.9\\mysqlconnector.0.69.9.nupkg.sha512",
-    "C:\\Users\\pc\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\pc\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\3.2.4\\pomelo.entityframeworkcore.mysql.3.2.4.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\pomelo.jsonobject\\2.2.1\\pomelo.jsonobject.2.2.1.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\system.collections.immutable\\1.7.1\\system.collections.immutable.1.7.1.nupkg.sha512",

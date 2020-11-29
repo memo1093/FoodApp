@@ -8,6 +8,19 @@ namespace foodapp.data.Concrete.EfCore
 {
     public class EfCoreCategoryRepository : EfCoreGenericRepository<Category, FoodContext>, ICategoryRepository
     {
+        public Category GetByIdWithProducts(int id)
+        {
+            using (var context = new FoodContext())
+            {
+                var category = context.Categories;
+
+                return category.Where(i=>i.CategoryId==id)
+                                .Include(i=>i.ProductCategories)
+                                .ThenInclude(i=>i.Product)
+                                .FirstOrDefault();
+            }
+        }
+
         public List<Category> GetCategoryByProductName(string name)
         {
             using (var context = new FoodContext())

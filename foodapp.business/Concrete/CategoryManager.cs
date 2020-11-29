@@ -32,15 +32,18 @@ namespace foodapp.business.Concrete
             return _categoryRepository.GetById(id);
         }
 
+        public Category GetByIdWithProducts(int id)
+        {
+            return _categoryRepository.GetByIdWithProducts(id);
+        }
+
         public List<Category> GetCategoryByProductName(string name)
         {
             return _categoryRepository.GetCategoryByProductName(name);
         }
-
         public void Update(Category entity)
         {
             _categoryRepository.Update(entity);
         }
-        
     }
 }
