@@ -10,11 +10,11 @@ namespace foodapp.business.Concrete
         private IProductRepository _productRepository;
         public ProductManager(IProductRepository productRepository)
         {
-            _productRepository=productRepository;
-        }  
+            _productRepository = productRepository;
+        }
         public void Create(Product entity)
         {
-            
+
             _productRepository.Create(entity);
         }
 
@@ -30,7 +30,12 @@ namespace foodapp.business.Concrete
 
         public Product GetById(int id)
         {
-           return _productRepository.GetById(id);
+            return _productRepository.GetById(id);
+        }
+
+        public Product GetByIdWithCategories(int id)
+        {
+            return _productRepository.GetByIdWithCategories(id);
         }
 
         public List<Product> GetProductsByCategory(string name)
@@ -43,5 +48,12 @@ namespace foodapp.business.Concrete
         {
             _productRepository.Update(entity);
         }
+        public void Update(Product entity, int[] categoryIds)
+        {
+            _productRepository.Update(entity, categoryIds);
+        }
+
+       
     }
+
 }

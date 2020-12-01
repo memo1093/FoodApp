@@ -13,6 +13,6 @@ namespace foodapp.webui.Models
         [Display(Name="Kategori Resmi",Prompt="Kategori Resmi")]
         public string ImageUrl { get; set; }
         [Display(Name="Kategoriye ait ürünler")]
-        public List<Product> Products{get; set;}
+        public List<Product> ProductsInThisCategory{get; set;}
     }
 }

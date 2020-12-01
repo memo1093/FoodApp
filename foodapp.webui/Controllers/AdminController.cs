@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using foodapp.business.Abstract;
 using foodapp.entity;
@@ -18,7 +19,7 @@ namespace foodapp.webui.Controllers
         }
         public IActionResult ProductList()
         {
-            return View(new ProductViewModel()
+            return View(new ProductCategoryListViewModel()
             {
                 Products = _productService.GetAll(),
                 Categories = _categoryService.GetAll(),
@@ -28,16 +29,20 @@ namespace foodapp.webui.Controllers
         [HttpGet]
         public IActionResult CreateProduct()
         {
+            ViewBag.Categories=_categoryService.GetAll();
             return View();
+            
         }
         [HttpPost]
         public IActionResult CreateProduct(ProductModel model)
         {
+            
             var entity = new Product()
             {
                 Name = model.Name,
                 Price = model.Price,
-                ImageUrl = model.ImageUrl
+                ImageUrl = model.ImageUrl,
+                
             };
             _productService.Create(entity);
             var msg = new AlertMessage()
@@ -58,7 +63,7 @@ namespace foodapp.webui.Controllers
             {
                 return NotFound();
             }
-            var entity = _productService.GetById((int)id);
+            var entity = _productService.GetByIdWithCategories((int)id);
             if (entity == null)
             {
                 return NotFound();
@@ -68,7 +73,9 @@ namespace foodapp.webui.Controllers
                 ProductId = entity.ProductId,
                 Name = entity.Name,
                 Price = entity.Price,
-                ImageUrl = entity.ImageUrl
+                ImageUrl = entity.ImageUrl,
+                CategoryId= entity.CategoryId,
+                SelectedCategories = entity.ProductCategories.Select(i=>i.Category).ToList()
             };
 
             ViewBag.Categories=_categoryService.GetAll();
@@ -77,7 +84,7 @@ namespace foodapp.webui.Controllers
 
         }
         [HttpPost]
-        public IActionResult EditProduct(ProductModel model)
+        public IActionResult EditProduct(ProductModel model,int [] categoryIds)
         {
             var entity = _productService.GetById(model.ProductId);
             if (entity == null)
@@ -88,8 +95,10 @@ namespace foodapp.webui.Controllers
             entity.Name = model.Name;
             entity.Price = model.ProductId;
             entity.ImageUrl = model.ImageUrl;
+            
+            
 
-            _productService.Update(entity);
+            _productService.Update(entity,categoryIds);
             var msg = new AlertMessage()
             {
                 Message = $"{entity.Name} isimli ürün başarıyla güncellendi.",
@@ -156,7 +165,7 @@ namespace foodapp.webui.Controllers
         public IActionResult CategoryList()
         {
 
-            return View(new ProductViewModel{
+            return View(new ProductCategoryListViewModel{
                 Categories=_categoryService.GetAll(),
                 Products = _productService.GetAll()
             });
@@ -205,7 +214,7 @@ namespace foodapp.webui.Controllers
                 CategoryId=category.CategoryId,
                 Name=category.Name,
                 ImageUrl=category.ImageUrl,
-                Products = category.ProductCategories.Select(p=>p.Product).ToList()
+                ProductsInThisCategory = category.ProductCategories.Select(p=>p.Product).ToList()
             };
             return View(model);
         }

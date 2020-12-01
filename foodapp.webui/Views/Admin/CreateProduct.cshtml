@@ -31,7 +31,18 @@
                     placeholder="11.jpg">
             </div>
         </div>
-        
+         @foreach (var category in (@List<Category>)ViewBag.Categories)
+        {
+            <div class="custom-control custom-radio">
+                    <input type="radio" 
+                    class="custom-control-input" 
+                    name="categoryIds"
+                    value="@category.CategoryId"
+                    id="category-@(category.CategoryId)" 
+                    >
+                    <label class="custom-control-label" for="category-@(category.CategoryId)">@category.Name</label>
+                </div>
+        }
         
         
         

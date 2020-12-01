@@ -21,12 +21,12 @@ namespace foodapp.webui.Controllers
 
         public IActionResult Index()
         {
-            var productViewModel = new ProductViewModel(){
+            var ProductCategoryListViewModel = new ProductCategoryListViewModel(){
                 Products = _productService.GetAll(),
                 Categories = _categoryService.GetAll()
                 
             };
-            return View(productViewModel);
+            return View(ProductCategoryListViewModel);
         }
 
         public IActionResult Privacy()

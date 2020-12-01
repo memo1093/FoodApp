@@ -17,7 +17,6 @@ namespace foodapp.webui.Models
         public int CategoryId { get; set; }
         [Display(Name="Resim Url'si",Prompt="11.jpg")]
         public string ImageUrl { get; set; }
-
         public List<Category> SelectedCategories{get; set;}
 
 

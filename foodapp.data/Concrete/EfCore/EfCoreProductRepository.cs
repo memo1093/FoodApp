@@ -19,6 +19,17 @@ namespace foodapp.data.Concrete.EfCore
             }
         }
 
+        public Product GetByIdWithCategories(int id)
+        {
+            using (var context = new FoodContext())
+            {
+                return context.Products.Where(p=>p.ProductId==id)
+                                        .Include(p=>p.ProductCategories)
+                                        .ThenInclude(pc=>pc.Category)
+                                        .FirstOrDefault();
+            }
+        }
+
         public List<Product> GetProductsByCategory(string name)
         {
             using (var context = new FoodContext())
@@ -36,25 +47,28 @@ namespace foodapp.data.Concrete.EfCore
             }
         }
 
-        public void Update(Product entity, int categoryId)
+        
+        public void Update(Product entity, int[] categoryIds)
         {
             using (var context = new FoodContext())
             {
-                var product = context.Products
-                                                .Include(i=>i.ProductCategories)
-                                                .FirstOrDefault(i=>i.ProductId==entity.ProductId);
+                var product = context.Products.Include(i=>i.ProductCategories).FirstOrDefault(i=>i.ProductId==entity.ProductId);
 
-               if (product!=null)
-               {
-                   product.Name= entity.Name;
-                   product.Price = entity.Price;
-                   product.ImageUrl = entity.ImageUrl;
+                if (product!=null)
+                {
+                    product.Name =entity.Name;
+                    product.Price =entity.Price;
+                    product.ImageUrl = entity.ImageUrl;
 
-                   product.CategoryId=categoryId;
-               }
-               context.SaveChanges();
-
+                    product.ProductCategories = categoryIds.Select(catid=>new ProductCategory(){
+                        ProductId=entity.ProductId,
+                        CategoryId=catid
+                    }).ToList();
+                }
+                context.SaveChanges();
             }
         }
+
+        
     }
 }

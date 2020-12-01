@@ -35,12 +35,13 @@
         </div>
         @foreach (var category in (@List<Category>)ViewBag.Categories)
         {
-            <div class="custom-control custom-checkbox">
-                    <input type="checkbox" 
+            <div class="custom-control custom-radio">
+                    <input type="radio" 
                     class="custom-control-input" 
                     name="categoryIds"
                     value="@category.CategoryId"
                     id="category-@(category.CategoryId)" 
+                    @(Model.SelectedCategories.Any(p=>p.CategoryId==category.CategoryId)?"checked":"")
                     
                     >
                     <label class="custom-control-label" for="category-@(category.CategoryId)">@category.Name</label>

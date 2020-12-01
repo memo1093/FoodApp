@@ -9,10 +9,11 @@ namespace foodapp.business.Abstract
         List<Product> GetAll();
         void Create(Product entity);
         void Update(Product entity);
-        
+        void Update(Product entity, int[] categoryIds);
         void Delete(Product entity);
+
         List<Product> GetProductsByCategory(string name);
-        
+        Product GetByIdWithCategories(int id);
         
     }
 }
