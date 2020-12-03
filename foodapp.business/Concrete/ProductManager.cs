@@ -18,6 +18,8 @@ namespace foodapp.business.Concrete
             _productRepository.Create(entity);
         }
 
+        
+
         public void Delete(Product entity)
         {
             _productRepository.Delete(entity);

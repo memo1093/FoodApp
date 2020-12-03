@@ -42,6 +42,7 @@ namespace foodapp.webui.Controllers
                 Name = model.Name,
                 Price = model.Price,
                 ImageUrl = model.ImageUrl,
+                CategoryId = model.CategoryId
                 
             };
             _productService.Create(entity);

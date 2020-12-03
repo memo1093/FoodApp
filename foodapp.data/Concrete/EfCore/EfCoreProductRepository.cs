@@ -19,6 +19,8 @@ namespace foodapp.data.Concrete.EfCore
             }
         }
 
+        
+
         public Product GetByIdWithCategories(int id)
         {
             using (var context = new FoodContext())

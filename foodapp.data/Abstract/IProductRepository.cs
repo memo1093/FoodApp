@@ -9,5 +9,6 @@ namespace foodapp.data.Abstract
         Product GetByIdWithCategories(int id);
 
         void Update(Product entity, int[] categoryIds);
+        
     }
 }

@@ -9,7 +9,6 @@
 
 
 <hr>
-
 <form asp-controller="Admin" asp-action="Createproduct" method="POST">
     <div class="container">
         <h1 class="h3">Create Product</h1>
@@ -34,13 +33,8 @@
          @foreach (var category in (@List<Category>)ViewBag.Categories)
         {
             <div class="custom-control custom-radio">
-                    <input type="radio" 
-                    class="custom-control-input" 
-                    name="categoryIds"
-                    value="@category.CategoryId"
-                    id="category-@(category.CategoryId)" 
-                    >
-                    <label class="custom-control-label" for="category-@(category.CategoryId)">@category.Name</label>
+                    @Html.RadioButton(category.Name,category.CategoryId)
+                    <label for="category-@category.CategoryId">@category.Name</label>
                 </div>
         }
         
