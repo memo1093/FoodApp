@@ -33,8 +33,15 @@
          @foreach (var category in (@List<Category>)ViewBag.Categories)
         {
             <div class="custom-control custom-radio">
-                    @Html.RadioButton(category.Name,category.CategoryId)
-                    <label for="category-@category.CategoryId">@category.Name</label>
+                    <input type="radio" 
+                    class="custom-control-input" 
+                    name="categoryId"
+                    value="@category.CategoryId"
+                    id="category-@(category.CategoryId)" 
+                    
+                    
+                    >
+                    <label class="custom-control-label" for="category-@(category.CategoryId)">@category.Name</label>
                 </div>
         }
         
