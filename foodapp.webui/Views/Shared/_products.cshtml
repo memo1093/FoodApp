@@ -1,0 +1,33 @@
+@model Product
+
+<div class="container-fluid form-inline ">
+    <div class="col-md-12 mt-3">
+        <div class="card">
+            <div class="card-horizontal">
+                <div class="img-square-wrapper">
+                    <img src="~/img/200.png" alt="" srcset="">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-dark">
+                        @Model.Name</h5>
+                    <p class="card-text text-dark">
+                        @Model.Price &#8378</p>
+                    <div class="input-group float-right my-2">
+
+                        <div class="input-group-prepend">
+                            <button class="btn btn-info text-light"
+                                id="minus-@Model.ProductId">-</button>
+                        </div>
+                        <input type="number" style="width: 50px;"
+                            class="form-control" id="quantity-@Model.ProductId"
+                            value="0">
+                        <div class="input-group-append">
+                            <button class="btn btn-info text-light"
+                                id="plus-@Model.ProductId">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

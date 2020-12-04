@@ -9,27 +9,28 @@ using foodapp.webui.Models;
 using foodapp.data.Abstract;
 using foodapp.webui.ViewModel;
 using foodapp.data.Concrete.EfCore;
+using foodapp.business.Abstract;
 
 namespace foodapp.webui.Controllers
 {
     public class HomeController : Controller
     {
         
-        private IProductRepository _productRepository;
+        private IProductService _productService;
         private ICategoryRepository _categoryRepository;
 
 
 
-        public HomeController(IProductRepository productRepository,ICategoryRepository categoryRepository)
+        public HomeController(IProductService productService,ICategoryRepository categoryRepository)
         {
-            this._productRepository=productRepository;
+            this._productService=productService;
             this._categoryRepository = categoryRepository;
         }
 
         public IActionResult Index()
         {
             var productViewModel = new ProductViewModel(){
-                Products = _productRepository.GetAll(),
+                Products = _productService.GetAll(),
                 Categories = _categoryRepository.GetAll()
                 
             };

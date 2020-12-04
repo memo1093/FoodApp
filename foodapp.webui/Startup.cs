@@ -1,3 +1,5 @@
+using foodapp.business.Abstract;
+using foodapp.business.Concrete;
 using foodapp.data.Abstract;
 using foodapp.data.Concrete.EfCore;
 using Microsoft.AspNetCore.Builder;
@@ -22,6 +24,7 @@ namespace foodapp.webui
         {
             services.AddScoped<IProductRepository,EfCoreProductRepository>();
             services.AddScoped<ICategoryRepository,EfCoreCategoryRepository>();
+            services.AddScoped<IProductService,ProductManager>();
 
             services.AddControllersWithViews();
         }
@@ -31,7 +34,7 @@ namespace foodapp.webui
         {
             if (env.IsDevelopment())
             {
-                app.UseStaticFiles();
+                SeedDatabase.Seed();
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -40,6 +43,7 @@ namespace foodapp.webui
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

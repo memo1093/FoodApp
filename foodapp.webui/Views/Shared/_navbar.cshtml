@@ -1,16 +1,23 @@
 <nav id="navbarMain" class="navbar navbar-expand navbar-dark navbar-fixed bg-success border-bottom fixed-top">
             <div class="container">
-                <a href="#" class="navbar-brand">Bazlama</a>
+                <a href="/" class="navbar-brand">Bazlama</a>
+                @* <ul class="navbar-nav">
+                    <li class="nav-item mr-2"> <a asp-controller="admin" asp-action="create" class="nav-link">Ürün Oluştur</a> </li>
+                    <li class="nav-item mr-2"> <a asp-controller="admin" asp-action="list" class="nav-link">Ürün Listesi</a> </li>
+                </ul> *@
                 <ul class="navbar-nav ml-auto" >
                     <li class="nav-item"><a href="#home" class="nav-link">Giriş</a>
                     </li>
                     <li class="nav-item"><a href="#products" class="nav-link">Ürünler</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="hideOnSmall">
                         <a href="#why" class="nav-link">Neden<span id="hideOnSmall"> Almalıyım</span>?</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link text-light" id="cart"><i
+                        <a asp-controller="order" asp-action="list" class="nav-link">Siparişlerim<span id="hideOnSmall"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="cart" asp-action="list" class="nav-link text-light" id="cart"><i
                                 class="fas fa-shopping-cart"></i></a>
                     </li>
                 </ul>
