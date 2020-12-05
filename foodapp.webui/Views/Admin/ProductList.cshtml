@@ -15,6 +15,7 @@
        @await Html.PartialAsync("_messages",false)
         
         <hr>
+        <div class="table-responsive">
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -25,7 +26,7 @@
                     <th scope="col">Onaylı mı?</th>
                     <th scope="col">Kategorisi</th>
                     <th scope="col">İşlemler</th>
-                    <th scope="col"><a asp-controller="admin" asp-action="CategoryList" class="btn btn-outline-primary">Kategori işlemleri</a></th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -85,8 +86,8 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td><a asp-controller="admin" asp-action="Createproduct" class="btn btn-info">Yeni ürün ekle</a></td>
+                    <td><a asp-controller="admin" asp-action="CategoryList" class="btn btn-outline-primary btn-sm">Kategori işlemleri</a></td>
+                    <td><a asp-controller="admin" asp-action="Createproduct" class="btn btn-primary">Yeni ürün ekle</a></td>
                 </tr>
                     
                 
@@ -94,6 +95,7 @@
             </tbody>
             
         </table>
+        </div>
     </div>
 </div>
 </div>

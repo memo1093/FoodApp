@@ -12,14 +12,15 @@
 
 <div class="container">
     @await Html.PartialAsync("_messages",false)
-<table class="table">
+<div class="table-responsive-md">
+    <table class="table">
     <thead class="thead-dark">
         <tr>
             <th scope="col">Kategori Numarası</th>
             <th scope="col">Resim</th>
             <th scope="col">Kategori İsmi</th>
             <th scope="col">İşlemler</th>
-            <th scope="col"><a asp-controller="admin" asp-action="Createcategory" class="btn btn-primary">Kategori oluştur</a></th>
+            
         </tr>
     </thead>
     <tbody>
@@ -46,9 +47,16 @@
                 
             </tr> 
         }
-        
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a asp-controller="admin" asp-action="Createcategory" class="btn btn-primary">Kategori oluştur</a></td>
+        </tr>
         
     </tbody>
 </table>
+
+</div>
 </div>
 

@@ -14,25 +14,36 @@
 <form asp-controller="admin" asp-action="Editproduct" method="POST">
     <input type="hidden" name="ProductId" value="@Model.ProductId">
     <div class="container">
-        <h1 class="h3">Edit Product</h1>
+        <h1 class="h3 my-4">Ürünü Düzenle</h1>
+        
+        @await Html.PartialAsync("_messages")
         <div class="form-group row">
             <label asp-for="Name" class="col-sm-2 col-form-label mb-2"></label>
             <div class="col-sm-10">
                 <input asp-for="Name" type="text" class="form-control"
                     placeholder="Ürün Adı">
+                    <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <label asp-for="Price" class="col-sm-2 col-form-label mb-2"></label>
             <div class="col-sm-10">
                 <input asp-for="Price" type="text" class="form-control"
-                    placeholder="0 &#8378">
+                    placeholder="3.50">
+                    <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <label asp-for="ImageUrl"
                 class="col-sm-2 col-form-label mb-2"></label>
             <div class="col-sm-10">
                 <input asp-for="ImageUrl" type="text" class="form-control"
                     placeholder="11.jpg">
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
         </div>
+        @for (int i = 0; i < @Model.SelectedCategories.Count; i++)
+        {
+            <input type="hidden" name="@Model.SelectedCategories[@i].CategoryId" value="@Model.SelectedCategories[@i].CategoryId">
+            <input type="hidden" name="@Model.SelectedCategories[@i].Name" value="@Model.SelectedCategories[@i].Name">
+
+        }
         @foreach (var category in (@List<Category>)ViewBag.Categories)
         {
             <div class="custom-control custom-radio">
@@ -47,7 +58,11 @@
                     <label class="custom-control-label" for="category-@(category.CategoryId)">@category.Name</label>
                 </div>
         }
-        <button class="btn btn-primary" type="submit">Ürünü Kaydet</button>
+        <button class="btn btn-primary my-4" type="submit">Ürünü Kaydet</button>
     </div>
 
 </form>
+@section Scripts{
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js" integrity="sha512-EanukVTZc4W9tUCLnDl069Izidg49PcNRKO1upLzKt9ajq66i+bXOtlzXcIbRhb6vVEGF6BCc8wQi5T1ztCpTQ==" crossorigin="anonymous"></script>
+}

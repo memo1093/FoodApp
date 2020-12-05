@@ -15,6 +15,7 @@ namespace foodapp.data.Concrete.EfCore
 
                 context.Products.Add(entity);
                 
+                
                 context.SaveChanges();
             }
         }

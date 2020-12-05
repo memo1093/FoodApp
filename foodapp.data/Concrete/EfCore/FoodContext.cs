@@ -17,7 +17,7 @@ namespace foodapp.data.Concrete.EfCore
         {
             builder.Entity<ProductCategory>()
                         .HasKey(c=>new{c.CategoryId,c.ProductId});
-            
+             
         }
     }
 }

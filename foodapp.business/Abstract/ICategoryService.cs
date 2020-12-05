@@ -3,16 +3,16 @@ using foodapp.entity;
 
 namespace foodapp.business.Abstract
 {
-    public interface ICategoryService
+    public interface ICategoryService:IValidator<Category>
     {
         Category GetById(int id);
         List<Category> GetAll();
         List<Category> GetCategoryByProductName(string name);
         Category GetByIdWithProducts(int id);
-        void Delete(Category entity);
+        bool Delete(Category entity);
 
-        void Update(Category entity);
-        void Create(Category entity);
+        bool Update(Category entity);
+        bool Create(Category entity);
 
 
         

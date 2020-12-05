@@ -12,14 +12,28 @@ namespace foodapp.business.Concrete
         {
             _categoryRepository = categoryRepository;
         }
-        public void Create(Category entity)
+
+        
+
+        public bool Create(Category entity)
         {
-            _categoryRepository.Create(entity);
+            if (Validation(entity))
+            {
+                _categoryRepository.Create(entity);
+                return true;
+            }
+            return false;
         }
 
-        public void Delete(Category entity)
+        public bool Delete(Category entity)
         {
-            _categoryRepository.Delete(entity);
+            if (Validation(entity))
+            {
+                _categoryRepository.Delete(entity);
+                return true;
+            }
+            return false;
+            
         }
 
         public List<Category> GetAll()
@@ -41,9 +55,34 @@ namespace foodapp.business.Concrete
         {
             return _categoryRepository.GetCategoryByProductName(name);
         }
-        public void Update(Category entity)
+        public bool Update(Category entity)
         {
-            _categoryRepository.Update(entity);
+            if (Validation(entity))
+            {
+                _categoryRepository.Update(entity);
+                return true;
+            }
+            return false;
+            
         }
+        public string ErrorMessage { get; set ; }
+        public bool Validation(Category entity)
+        {
+            bool isValid = true;
+            if (string.IsNullOrEmpty(entity.Name))
+            {
+                ErrorMessage += "Kategori adı mutlaka girilmelidir.";
+                return false;
+            }
+            if (entity.Name.Length<4 && entity.Name.Length>20)
+            {
+                ErrorMessage += "Kategori adı 4-20 karakter arası olmalıdır";
+                return false;
+            }
+           
+            return isValid;
+        }
+        
+
     }
 }
