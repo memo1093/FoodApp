@@ -121,13 +121,14 @@ namespace foodapp.business.Concrete
             }
             if (string.IsNullOrEmpty(entity.ImageUrl))
             {
-                ErrorMessage +="Ürün resmi girilmelidir.  \n";
+                ErrorMessage += "Ürün resmi girilmelidir. \n";
                 return false;
             }
             
-            
             return true;
         }
-    }
+
+       
+    }  
 
 }

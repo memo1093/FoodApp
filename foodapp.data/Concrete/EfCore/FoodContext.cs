@@ -15,8 +15,16 @@ namespace foodapp.data.Concrete.EfCore
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<ProductCategory>()
-                        .HasKey(c=>new{c.CategoryId,c.ProductId});
+            builder.Entity<ProductCategory>().HasKey(i=>new{i.CategoryId,i.ProductId});
+
+            builder.Entity<ProductCategory>().HasOne(p=>p.Product)
+                                            .WithMany(p=>p.ProductCategories)
+                                            .HasForeignKey(p=>p.ProductId);
+
+            builder.Entity<ProductCategory>().HasOne(c=>c.Category)
+                                            .WithMany(c=>c.ProductCategories)
+                                            .HasForeignKey(c=>c.CategoryId);
+            
              
         }
     }

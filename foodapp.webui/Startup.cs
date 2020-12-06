@@ -1,9 +1,13 @@
+using System;
 using foodapp.business.Abstract;
 using foodapp.business.Concrete;
 using foodapp.data.Abstract;
 using foodapp.data.Concrete.EfCore;
+using foodapp.webui.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +26,30 @@ namespace foodapp.webui
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationContext>(options=>options.UseMySql( @"server=localhost;port=3306;user=root;password=Mysql-1234;database=FoodDb"));
+            services.AddIdentity<User,IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options=>{
+                //password
+                options.Password.RequiredLength =6;
+
+                //Lockout
+                options.Lockout.MaxFailedAccessAttempts =5;
+                options.Lockout.DefaultLockoutTimeSpan =TimeSpan.FromMinutes(10);
+                options.Lockout.AllowedForNewUsers= true;
+
+                //User
+                // options.User.AllowedUserNameCharacters+="İıÖöÜüŞşÜü";
+                options.User.RequireUniqueEmail=true;
+                options.SignIn.RequireConfirmedEmail=true;
+                // options.SignIn.RequireConfirmedPhoneNumber=true;
+
+
+            });
+            services.ConfigureApplicationCookie(options=>{
+                
+            });
+
             services.AddScoped<IProductRepository,EfCoreProductRepository>();
             services.AddScoped<ICategoryRepository,EfCoreCategoryRepository>();
 
@@ -49,6 +77,7 @@ namespace foodapp.webui
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();

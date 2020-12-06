@@ -18,11 +18,13 @@ namespace foodapp.webui.Models
         [Display(Name="Onaylı mı?",Prompt="Hayır")]
         public bool IsApproved { get; set; }
         [Display(Name="Kategori Numarası",Prompt="1")]
-        
+
+       
         public int CategoryId { get; set; }
         [Display(Name="Resim Url'si",Prompt="11.jpg")]
-        [Required(ErrorMessage="Resim Url'si girilmelidir.")]
+        
         public string ImageUrl { get; set; }
+        
         public List<Category> SelectedCategories{get; set;}
 
 

@@ -8,20 +8,6 @@ namespace foodapp.data.Concrete.EfCore
 {
     public class EfCoreProductRepository : EfCoreGenericRepository<Product, FoodContext>, IProductRepository
     {
-        public void Create(Product entity, int categoryId)
-        {
-            using (var context = new FoodContext())
-            {
-
-                context.Products.Add(entity);
-                
-                
-                context.SaveChanges();
-            }
-        }
-
-        
-
         public Product GetByIdWithCategories(int id)
         {
             using (var context = new FoodContext())

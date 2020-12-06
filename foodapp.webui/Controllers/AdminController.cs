@@ -1,8 +1,11 @@
 using System;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using foodapp.business.Abstract;
 using foodapp.entity;
 using foodapp.webui.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -26,6 +29,8 @@ namespace foodapp.webui.Controllers
             });
         }
 
+
+
         [HttpGet]
         public IActionResult CreateProduct()
         {
@@ -34,21 +39,38 @@ namespace foodapp.webui.Controllers
 
         }
         [HttpPost]
-        public IActionResult CreateProduct(ProductModel model)
+        public async Task<IActionResult> CreateProduct(ProductModel model, IFormFile file,int categoryId)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    var extension = Path.GetExtension(file.FileName);
+                    var randomName = string.Format($"{DateTime.Now.Ticks}{extension}");
+
+                    model.ImageUrl = randomName;
+
+
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img\\Products", randomName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                }
+
                 var entity = new Product()
                 {
                     Name = model.Name,
                     Price = model.Price,
                     ImageUrl = model.ImageUrl,
-                    CategoryId = model.CategoryId
+                    CategoryId = categoryId
 
                 };
+
+
                 if (_productService.Create(entity))
                 {
-                    CreateMessage($"{entity.Name} adlı ürün başarıyla eklendi","alert-success");
+                    CreateMessage($"{entity.Name} adlı ürün başarıyla eklendi", "alert-success");
                     return RedirectToAction("ProductList");
                 };
                 CreateMessage(_productService.ErrorMessage);
@@ -87,7 +109,7 @@ namespace foodapp.webui.Controllers
 
         }
         [HttpPost]
-        public IActionResult EditProduct(ProductModel model, int[] categoryIds)
+        public async Task<IActionResult> EditProduct(ProductModel model, int[] categoryIds, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -99,28 +121,47 @@ namespace foodapp.webui.Controllers
                 entity.ProductId = model.ProductId;
                 entity.Name = model.Name;
                 entity.Price = model.Price;
-                entity.ImageUrl = model.ImageUrl;
-                
+
+                if (file != null)
+                {
+
+                    var extension = Path.GetExtension(file.FileName);
+                    var randomName = string.Format($"{DateTime.Now.Ticks}{extension}");
+                    entity.ImageUrl = randomName;
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img\\Products", randomName);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                }
+                if (categoryIds.Length<0)
+                {
+                    CreateMessage($"Ürün kategorisi seçmelisiniz.");
+                    return View(model);
+                }
                 
 
-                if ( _productService.Update(entity, categoryIds))
+                if (_productService.Update(entity, categoryIds))
                 {
-                    CreateMessage($"{entity.Name} isimli ürün başarıyla güncellendi.","alert-success");
+                    CreateMessage($"{entity.Name} isimli ürün başarıyla güncellendi.", "alert-success");
                     return RedirectToAction("ProductList");
                 }
                 CreateMessage(_productService.ErrorMessage);
             }
-            
+
             ViewBag.Categories = _categoryService.GetAll();
             return View(model);
 
         }
 
+
+
         [HttpPost]
         public IActionResult DeleteProduct(int productId)
         {
             var entity = _productService.GetById(productId);
-            if (entity==null)
+            if (entity == null)
             {
                 CreateMessage($"{entity.Name} adında ürün yok.");
             }
@@ -128,12 +169,20 @@ namespace foodapp.webui.Controllers
             {
                 if (_productService.Delete(entity))
                 {
+
+
                     CreateMessage($"{entity.Name} isimli ürün silindi.");
+                    if (entity.ImageUrl != null)
+                    {
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", "Products", entity.ImageUrl);
+                        FileInfo file = new FileInfo(path);
+                        file.Delete();
+                    }
                 };
-                
+
             }
-            
-            
+
+
             return RedirectToAction("ProductList");
         }
         [HttpPost]
@@ -156,7 +205,7 @@ namespace foodapp.webui.Controllers
                     approveAction = true;
                     entity.IsApproved = approveAction;
                     _productService.Update(entity);
-                    CreateMessage($"{entity.Name} isimli ürün başarıyla onaylandı.","alert-warning");
+                    CreateMessage($"{entity.Name} isimli ürün başarıyla onaylandı.", "alert-warning");
                 }
 
 
@@ -194,9 +243,9 @@ namespace foodapp.webui.Controllers
                 };
                 if (_categoryService.Create(entity))
                 {
-                    
+
                 }
-                
+
 
                 var msg = new AlertMessage()
                 {
@@ -285,15 +334,16 @@ namespace foodapp.webui.Controllers
             return RedirectToAction("CategoryList");
         }
 
-        private void CreateMessage(string message, string alertType="alert-danger")
+        private void CreateMessage(string message, string alertType = "alert-danger")
         {
             var msg = new AlertMessage()
-                    {
-                        Message = message,
-                        AlertType = alertType
-                    };
-                    TempData["message"] = JsonConvert.SerializeObject(msg);
+            {
+                Message = message,
+                AlertType = alertType
+            };
+            TempData["message"] = JsonConvert.SerializeObject(msg);
         }
+
 
 
 

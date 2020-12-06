@@ -14,6 +14,5 @@ namespace foodapp.business.Abstract
 
         List<Product> GetProductsByCategory(string name);
         Product GetByIdWithCategories(int id);
-        
     }
 }
