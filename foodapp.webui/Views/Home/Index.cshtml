@@ -1,4 +1,4 @@
-﻿@model ProductViewModel
+﻿@model ProductCategoryListViewModel
 @{
     Layout="_Layout";
     var categories = Model.Categories;
@@ -8,6 +8,7 @@
 @await Html.PartialAsync("_navbar")
 @await Html.PartialAsync("_header")
 
+<main>
 <div class="row justify-content-md-center no-gutters bg-light" id="products">
 @foreach (var category in categories)
 {
@@ -24,16 +25,16 @@
                                 {
                                     @await Html.PartialAsync("_noproduct");
                                 }
-                                @if (product.CategoryId==category.CategoryId)
+                                @if (product.CategoryId==category.CategoryId && product.IsApproved)
                                 {
-                                    @await Html.PartialAsync("_products",product);
+                                     @await Html.PartialAsync("_products",product);
                                 }
                                 
                                 
                                                                
                             }
 
-                           <div class="row justify-content-md-center">
+                           <div class="row justify-content-center">
                                <div class="col-auto">
                                    <button class="btn btn-outline-info float-right my-2"
                              asp-controller="shop" asp-action="addtocart">Sepete Ekle</button>
@@ -63,5 +64,7 @@
 
 
 </div>
+
+</main>
 
 

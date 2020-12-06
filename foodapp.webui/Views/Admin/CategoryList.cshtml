@@ -1,0 +1,62 @@
+@model ProductCategoryListViewModel
+@{
+    Layout = "_Layout";
+    var categories = Model.Categories;
+}
+
+
+
+@await Html.PartialAsync("_navbar2")
+
+<hr>
+
+<div class="container">
+    @await Html.PartialAsync("_messages",false)
+<div class="table-responsive-md">
+    <table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Kategori Numarası</th>
+            <th scope="col">Resim</th>
+            <th scope="col">Kategori İsmi</th>
+            <th scope="col">İşlemler</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in categories)
+        {
+            <tr>
+                <th scope="row">@category.CategoryId</th>
+                <td><img src="~/img/Categories/@category.ImageUrl" alt="@category.Name" style="max-width: 200px;"></td>
+                <td>@category.Name</td>
+                
+                    <td class="btn-group"> 
+                        <label class="btn btn-primary"><a asp-controller="admin" asp-action="Editcategory" asp-route-id="@category.CategoryId" class="btn btn-primary">Düzenle</a></label>
+                        
+                        <label class="btn btn-danger">
+                        <form action="/admin/Deletecategory" class="form-inline" method="POST" style="display: inline;">
+                        <input type="hidden" name="CategoryId" value="@category.CategoryId">
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                        
+                        </form>
+                        </label>
+
+                        
+                    </td>
+                
+            </tr> 
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a asp-controller="admin" asp-action="Createcategory" class="btn btn-primary">Kategori oluştur</a></td>
+        </tr>
+        
+    </tbody>
+</table>
+
+</div>
+</div>
+

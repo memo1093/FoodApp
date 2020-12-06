@@ -1,0 +1,34 @@
+@model CategoryModel
+
+@{
+    Layout="_Layout";
+}
+@await Html.PartialAsync("_navbar2")
+
+<form asp-controller="admin" asp-action="Createcategory" method="POST">
+ 
+    <div class="container">
+        
+        <h1 class="h3">Kategori Oluştur</h1>
+         @await Html.PartialAsync("_messages")
+    <div class="form-group row">
+        <label asp-for="Name" class="col-sm-2 col-form-label mb-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="Name" type="text" class="form-control" placeholder="Kategori Adı">
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+        
+        <label asp-for="ImageUrl" class="col-sm-2 col-form-label mb-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="ImageUrl" type="text" class="form-control" placeholder="11.jpg">
+            <span class="text-danger" asp-validation-for="ImageUrl"></span>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Kategori türünü Kaydet</button>
+    </div>
+
+</form>
+@section Scripts{
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js" integrity="sha512-EanukVTZc4W9tUCLnDl069Izidg49PcNRKO1upLzKt9ajq66i+bXOtlzXcIbRhb6vVEGF6BCc8wQi5T1ztCpTQ==" crossorigin="anonymous"></script>
+}

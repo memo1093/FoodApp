@@ -1,0 +1,101 @@
+@model ProductCategoryListViewModel
+
+@{
+    Layout = "_Layout";
+    var categories = Model.Categories;
+    var products = Model.Products;
+}
+
+
+@await Html.PartialAsync("_navbar2")
+<div class="container my-4">
+<div class="row">
+    <div class="col-md-12">
+        <h1>Ürün Listesi</h1>
+       @await Html.PartialAsync("_messages",false)
+        
+        <hr>
+        <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Resim Url'si</th>
+                    <th scope="col">İsim</th>
+                    <th scope="col">Fiyat</th>
+                    <th scope="col">Onaylı mı?</th>
+                    <th scope="col">Kategorisi</th>
+                    <th scope="col">İşlemler</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @if (products.Count()<=0)
+                {
+                   @await Html.PartialAsync("_noproducts");
+                }
+                @foreach (var product in products)
+                {
+                    <tr>
+                    <th scope="row">@product.ProductId</th>
+                    <td><img src="~/img/Products/@product.ImageUrl" class="img-thumbnail" style="max-width: 200px; max-height:200px;" alt=""></td>
+                    <td>@product.Name</td>
+                    <td>@product.Price &#8378</td>
+                    <td>
+                        @if (@product.IsApproved)
+                        {
+                           <i class="far fa-2x fa-check-circle text-success"></i>
+                        }else{
+                            <i class="far fa-2x fa-times-circle text-danger"></i>
+                        }
+                        </td>
+                    <td>
+                        @foreach (var category in categories)
+                    {
+                        @if (category.CategoryId==product.CategoryId)
+                        {
+                            <p>@category.Name</p>
+                        }
+                        
+                    }
+                    </td>
+                    <td class="btn-group"> 
+                        <label class="btn btn-primary"><a asp-controller="admin" asp-action="Editproduct" asp-route-id="@product.ProductId" class="btn btn-primary">Düzenle</a></label>
+                        
+                        
+                        <label class="btn btn-warning"><button class="btn btn-warning" data-toggle="modal" data-target="#Modal-@product.ProductId">Onayla/Onay Kaldır</button></label>
+                        <form action="/admin/Approve" method="post">
+                        <input type="hidden" name="ProductId" value="@product.ProductId">
+                        @await Html.PartialAsync("_warning",product)
+                        </form>
+                        <label class="btn btn-danger">
+                        <form action="/admin/Deleteproduct" class="form-inline" method="POST" style="display: inline;">
+                        <input type="hidden" name="ProductId" value="@product.ProductId">
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                        
+                        </form>
+                        </label>
+
+                        
+                    </td>
+                    </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a asp-controller="admin" asp-action="CategoryList" class="btn btn-outline-primary btn-sm">Kategori işlemleri</a></td>
+                    <td><a asp-controller="admin" asp-action="Createproduct" class="btn btn-primary">Yeni ürün ekle</a></td>
+                </tr>
+                    
+                
+                
+            </tbody>
+            
+        </table>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,97 @@
+@{
+    Layout = "_Layout";
+}
+@model CategoryModel
+
+
+@await Html.PartialAsync("_navbar2")
+
+
+
+<hr>
+<div class="row">
+    <div class="col-md-5">
+         @await Html.PartialAsync("_messages")
+        <form asp-controller="admin" asp-action="Editcategory" method="POST">
+            <input type="hidden" name="CategoryId" value="@Model.CategoryId">
+            <div class="container">
+                <h1 class="h3 my-2">Kategoriyi Düzenle</h1>
+                <div class="form-group row">
+                    <label asp-for="Name"
+                        class="col-sm-2 col-form-label mb-2"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="Name" type="text" class="form-control"
+                            placeholder="Kategori Adı">
+                            <span class="text-danger" asp-validation-for="Name"></span>
+                    </div>
+
+                    <label asp-for="ImageUrl"
+                        class="col-sm-2 col-form-label mb-2"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="ImageUrl" type="text"
+                            class="form-control" placeholder="11.jpg">
+                            <span class="text-danger" asp-validation-for="ImageUrl"></span>
+                    </div>
+                </div>
+
+
+                <button class="btn btn-primary" type="submit">Kategori türünü
+                    Kaydet</button>
+            </div>
+            @if (@Model.ProductsInThisCategory.Count>0)
+            {
+                <div id="products">
+                    @for (int i = 0; i < @Model.ProductsInThisCategory.Count; i++)
+                    {
+                        <input type="hidden" name="@Model.ProductsInThisCategory[@i].ProductId" value="@Model.ProductsInThisCategory[@i].ProductId">
+                        <input type="hidden" name="@Model.ProductsInThisCategory[@i].Name" value="@Model.ProductsInThisCategory[@i].Name">
+                        <input type="hidden" name="@Model.ProductsInThisCategory[@i].ImageUrl" value="@Model.ProductsInThisCategory[@i].ImageUrl">
+                    }
+            </div>
+            }
+            
+
+        </form>
+
+    </div>
+
+<div class="col-md-7">
+
+    <div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ürün Id</th>
+                <th>Ürün Resmi</th>
+                <th>Ürün adı</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.ProductsInThisCategory.Count>0)
+            {
+                
+                @foreach (var product in @Model.ProductsInThisCategory)
+                {
+                <tr>
+                    <td>@product.ProductId</td>
+                    <td><img src="~/img/Products/@product.ImageUrl" alt="@product.Name" style="max-width: 200px;"> </td>
+                    <td>@product.Name</td>
+                </tr>
+                }
+            }
+            
+            
+        </tbody>
+    </table>
+    <hr>
+
+</div>
+</div>
+
+</div>
+@section Scripts{
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js" integrity="sha512-EanukVTZc4W9tUCLnDl069Izidg49PcNRKO1upLzKt9ajq66i+bXOtlzXcIbRhb6vVEGF6BCc8wQi5T1ztCpTQ==" crossorigin="anonymous"></script>
+}
+
+

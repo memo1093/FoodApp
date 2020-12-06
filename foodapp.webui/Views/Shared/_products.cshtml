@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-horizontal">
                 <div class="img-square-wrapper">
-                    <img src="~/img/200.png" alt="" srcset="">
+                    <img src="~/img/200.png" class="img-fluid" alt="" srcset="">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title text-dark">
@@ -15,14 +15,14 @@
                     <div class="input-group float-right my-2">
 
                         <div class="input-group-prepend">
-                            <button class="btn btn-info text-light"
+                            <button class="btn btn-info btn-sm text-light"
                                 id="minus-@Model.ProductId">-</button>
                         </div>
-                        <input type="number" style="width: 50px;"
-                            class="form-control" id="quantity-@Model.ProductId"
+                        <input type="number"
+                            class="form-control input-sm" id="quantity-@Model.ProductId"
                             value="0">
                         <div class="input-group-append">
-                            <button class="btn btn-info text-light"
+                            <button class="btn btn-info btn-sm text-light"
                                 id="plus-@Model.ProductId">+</button>
                         </div>
                     </div>
