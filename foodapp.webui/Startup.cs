@@ -6,6 +6,7 @@ using foodapp.data.Concrete.EfCore;
 using foodapp.webui.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +33,10 @@ namespace foodapp.webui
             services.Configure<IdentityOptions>(options=>{
                 //password
                 options.Password.RequiredLength =6;
+                options.Password.RequiredUniqueChars=0;
+                options.Password.RequireUppercase=false;
+                options.Password.RequireDigit=true;
+                options.Password.RequireLowercase=true;
 
                 //Lockout
                 options.Lockout.MaxFailedAccessAttempts =5;
@@ -47,7 +52,16 @@ namespace foodapp.webui
 
             });
             services.ConfigureApplicationCookie(options=>{
-                
+                options.LoginPath = "/account/login";
+                options.LogoutPath = "/account/logout";
+                options.AccessDeniedPath="/account/accessdenied";
+                options.SlidingExpiration=true;
+                options.ExpireTimeSpan=TimeSpan.FromDays(2);
+                options.Cookie = new CookieBuilder{
+                    HttpOnly = true,
+                    Name = ".foodapp.Security.Cookie",
+                    SameSite= SameSiteMode.Strict
+                };
             });
 
             services.AddScoped<IProductRepository,EfCoreProductRepository>();

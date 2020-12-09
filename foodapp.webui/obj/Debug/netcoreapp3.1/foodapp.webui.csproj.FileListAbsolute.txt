@@ -85,3 +85,7 @@ C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_navbarRegister.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Account\ConfirmEmail.cshtml.g.cs

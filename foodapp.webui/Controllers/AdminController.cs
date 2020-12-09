@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using foodapp.business.Abstract;
 using foodapp.entity;
 using foodapp.webui.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace foodapp.webui.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private IProductService _productService;
@@ -39,7 +41,7 @@ namespace foodapp.webui.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> CreateProduct(ProductModel model, IFormFile file,int categoryId)
+        public async Task<IActionResult> CreateProduct(ProductModel model, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +65,7 @@ namespace foodapp.webui.Controllers
                     Name = model.Name,
                     Price = model.Price,
                     ImageUrl = model.ImageUrl,
-                    CategoryId = categoryId
+                    CategoryId = model.CategoryId
 
                 };
 
