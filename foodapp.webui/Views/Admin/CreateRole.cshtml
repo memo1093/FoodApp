@@ -1,0 +1,38 @@
+@{
+    Layout = "_Layout";
+    
+}
+@model RoleModel
+
+
+@await Html.PartialAsync("_navbar2")
+
+
+<hr>
+<div class="container">
+<form asp-controller="Admin" asp-action="CreateRole" method="POST">
+    
+    
+        
+        <h1 class="h3 my-4">Rol Oluştur</h1>
+        <div class="text-warning" asp-validation-summary="ModelOnly"></div>
+        <partial name="_messages" model="@(TempData.Get<AlertMessage>("message"))" />
+        
+        <div class="form-group row">
+            <label asp-for="Name" class="col-sm-2 col-form-label mb-2"></label>
+            <div class="col-sm-10">
+                <input asp-for="Name" type="text" class="form-control">
+                    <span asp-validation-for="Name" class="text-danger my-2"></span>
+        </div>
+        <button class="btn btn-primary my-4" type="submit">Oluştur</button>
+    
+</form>
+</div>
+
+
+
+
+@section Scripts{
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js" integrity="sha512-EanukVTZc4W9tUCLnDl069Izidg49PcNRKO1upLzKt9ajq66i+bXOtlzXcIbRhb6vVEGF6BCc8wQi5T1ztCpTQ==" crossorigin="anonymous"></script>
+}

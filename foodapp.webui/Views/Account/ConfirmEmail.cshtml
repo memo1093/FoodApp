@@ -1,0 +1,13 @@
+@{
+    Layout="_Layout";
+}
+
+
+@await Html.PartialAsync("_navbarRegister")
+<div class="container my-4">
+
+<partial name="_messages" model="@(TempData.Get<AlertMessage>("message"))" />
+<h4>Bu giriş yapmak için bu <a href="~/account/login">linke</a> tıklayabilirsiniz. </h4>
+</div>
+
+

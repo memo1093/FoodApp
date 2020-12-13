@@ -12,9 +12,11 @@ $('.product-card').on('click',function(){$('.collapse').collapse('hide');})
 
 
 $(function () {
+    
     $('[data-toggle="tooltip"]').tooltip()
-  })
+  });
 
+  
       
 
 

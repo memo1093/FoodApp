@@ -10,7 +10,7 @@
     <div class="container">
         
         <h1 class="h3">Kategori Oluştur</h1>
-         @await Html.PartialAsync("_messages")
+    <partial name="_messages" model="@(TempData.Get<AlertMessage>("message"))" />
     <div class="form-group row">
         <label asp-for="Name" class="col-sm-2 col-form-label mb-2"></label>
         <div class="col-sm-10">

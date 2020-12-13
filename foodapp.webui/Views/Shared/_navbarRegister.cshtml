@@ -1,0 +1,30 @@
+<nav id="navbarMain"
+    class="navbar navbar-expand navbar-dark navbar-fixed bg-success border-bottom">
+    <div class="container">
+        <a href="/" class="navbar-brand">Bazlama</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a asp-controller="Home" asp-action="Index"
+                    class="nav-link">Anasayfa</a>
+            </li>
+            <li class="nav-item"><a href="~/#products"
+                    class="nav-link">Ürünler</a>
+            </li>
+            <li class="nav-item">
+                <a asp-controller="shop" asp-action="list"
+                    class="nav-link text-light" id="cart" data-toggle="tooltip"
+                    data-placement="top" title="Sepetim"><i
+                        class="fas fa-shopping-cart"></i></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link text-light" id="user" data-toggle="dropdown"
+                    title='Kullanıcı Girişi'><i class="fas fa-user"></i></a>
+                <div class="dropdown-menu">
+                        <a class="dropdown-item" asp-controller="Account"
+                            asp-action="Login">Giriş Yap</a>
+                        <a class="dropdown-item" asp-controller="Account"
+                            asp-action="Register">Üye ol</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>

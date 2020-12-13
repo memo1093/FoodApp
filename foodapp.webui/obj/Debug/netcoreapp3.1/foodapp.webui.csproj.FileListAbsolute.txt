@@ -85,3 +85,15 @@ C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_navbarRegister.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Account\ConfirmEmail.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Account\ForgotPassword.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPassword.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Admin\RolesList.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Admin\CreateRole.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditRole.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Account\AccessDenied.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Admin\UserList.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditUser.cshtml.g.cs

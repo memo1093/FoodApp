@@ -1,0 +1,77 @@
+@{
+    Layout = "_Layout";
+    
+}
+@model RoleDetails
+
+
+@await Html.PartialAsync("_navbar2")
+
+
+<hr>
+<div class="container">
+<form asp-controller="Admin" asp-action="EditRole" method="POST">
+    
+        <input type="hidden" name="RoleId" value="@Model.Role.Id">
+        <input type="hidden" name="RoleName" value="@Model.Role.Name">
+        <h1 class="h3 my-4">Rol Düzenle</h1>
+        <div class="text-warning" asp-validation-summary="ModelOnly"></div>
+        
+        <partial name="_messages" model="@(TempData.Get<AlertMessage>("message"))" />
+        <div class="form-group row">
+            <div class="col-md-12">
+                    <h6 class="bg-info text-white p-1">@Model.Role.Name rolüne ekle</h6>
+                    <table class="table-border table-sm">
+                        @if (Model.NonMembers.Count()==0)
+                        {
+                            <tr>
+                                <td colspan="2">Bütün Kullanıcılar bir role aittir.</td>
+                            </tr>
+                        }else
+                        {
+                            @foreach (var user in Model.NonMembers)
+                            {
+                                <tr>
+                                    
+                                    <td>@user.UserName</td>
+                                    <td><input type="checkbox" name="IdsToAdd" value="@user.Id" id="userId"></td>
+                                </tr>
+                            }
+                        }
+                        </table>
+                        <hr>
+                        <h6 class="bg-info text-white p-1">@Model.Role.Name rolünden çıkart</h6>
+                        <table class="table-border table-sm">
+                        <table class="table-border table-sm">
+                         @if (Model.Members.Count()==0)
+                        {
+                            <tr>
+                                <td colspan="2">Bu role ait kullanıcı yoktur.</td>
+                            </tr>
+                        }else
+                        {
+                            @foreach (var user in Model.Members)
+                            {
+                                <tr>
+                                    <td>@user.UserName</td>
+                                    <td><input type="checkbox" name="IdsToDelete" value="@user.Id" id="userId"></td>
+                                </tr>
+                            }
+                        }
+                        </table>
+                        <button class="btn btn-primary my-4" type="submit">Onayla</button>
+                    
+            </div>
+            
+        </div>
+    
+</form>
+</div>
+
+
+
+
+@section Scripts{
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js" integrity="sha512-EanukVTZc4W9tUCLnDl069Izidg49PcNRKO1upLzKt9ajq66i+bXOtlzXcIbRhb6vVEGF6BCc8wQi5T1ztCpTQ==" crossorigin="anonymous"></script>
+}

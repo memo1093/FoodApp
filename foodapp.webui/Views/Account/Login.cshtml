@@ -1,0 +1,58 @@
+@{
+    Layout ="_Layout";
+}
+@model LoginModel
+@await Html.PartialAsync("_navbar2")
+
+<hr>
+<form asp-controller="Account" asp-action="Login" method="POST" >
+    
+    <div class="container">
+        
+        <h1 class="h3 my-4">Giriş Yap</h1>
+        <partial name="_messages" model="@(TempData.Get<AlertMessage>("message"))" />
+        
+        <div class="form-group">
+           
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div> 
+             @if (User.Identity.IsAuthenticated)
+            {
+              <input type="hidden" name="ReturnUrl" value="@Model.ReturnUrl">
+            }
+            else
+            {
+                <input type="hidden" name="ReturnUrl" value="/">
+            }
+           
+           
+            <label asp-for="UserName" class="col-sm-2 col-form-label mb-2"></label>
+            <div class="col-sm-5">
+                <input asp-for="UserName" type="text" class="form-control"
+                    >
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <label asp-for="Password" class="col-sm-2 col-form-label mb-2"></label>
+            <div class="col-sm-5">
+                <input asp-for="Password" type="password" class="form-control">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+           
+            <div class="col-sm-5 my-2">
+                <a asp-controller="Account" asp-action="Register">Kayıt ol</a>
+                <span> | </span>
+                <a asp-controller="Account" asp-action="ForgotPassword">Şifremi Unuttum</a>
+            </div>
+            
+        </div>
+        
+        
+       <button class="btn btn-primary m-4" type="submit">Giriş Yap</button>
+
+    </div>
+
+</form>
+
+@section Scripts{
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js" integrity="sha512-EanukVTZc4W9tUCLnDl069Izidg49PcNRKO1upLzKt9ajq66i+bXOtlzXcIbRhb6vVEGF6BCc8wQi5T1ztCpTQ==" crossorigin="anonymous"></script>
+}
