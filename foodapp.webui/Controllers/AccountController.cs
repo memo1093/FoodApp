@@ -87,6 +87,7 @@ namespace foodapp.webui.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
+                await _userManager.AddToRoleAsync(user,"customer");
                 //generate token
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 var url = Url.Action("ConfirmEmail", "Account", new
@@ -116,7 +117,7 @@ namespace foodapp.webui.Controllers
         public IActionResult ForgotPassword()
         {
             return View();
-        }
+        } 
         [HttpPost]
         public async Task<IActionResult> ForgotPassword(string email)
         {
