@@ -117,7 +117,7 @@ namespace foodapp.webui.Controllers
         public IActionResult ForgotPassword()
         {
             return View();
-        }
+        } 
         [HttpPost]
         public async Task<IActionResult> ForgotPassword(string email)
         {
