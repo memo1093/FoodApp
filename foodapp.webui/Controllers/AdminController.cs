@@ -31,12 +31,12 @@ namespace foodapp.webui.Controllers
             this._roleManager = roleManager;
             this._userManager = userManager;
         }
-        [Authorize(Roles="Master")]
+        [Authorize(Roles="master")]
         public IActionResult RolesList()
         {
             return View(_roleManager.Roles);
         }
-        [Authorize(Roles="Master")]
+        [Authorize(Roles="master")]
         public IActionResult CreateRole()
         {
             return View();
@@ -76,7 +76,7 @@ namespace foodapp.webui.Controllers
             return View(model);
             
         }
-        [Authorize(Roles="Master")]
+        [Authorize(Roles="master")]
         public async Task<IActionResult> EditRole(string id)
         {
             var role = await _roleManager.FindByIdAsync(id);
@@ -217,7 +217,7 @@ namespace foodapp.webui.Controllers
         
 
 
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles="admin")]
         [HttpGet]
         public IActionResult CreateProduct()
         {
@@ -277,7 +277,7 @@ namespace foodapp.webui.Controllers
 
 
         }
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles="admin")]
         [HttpGet]
         public IActionResult EditProduct(int? id)
         {
@@ -305,7 +305,7 @@ namespace foodapp.webui.Controllers
             return View(model);
 
         }
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles="admin")]
         [HttpPost]
         public async Task<IActionResult> EditProduct(ProductModel model, int[] categoryIds, IFormFile file)
         {
@@ -371,7 +371,7 @@ namespace foodapp.webui.Controllers
         }
 
 
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles="admin")]
         [HttpPost]
         public IActionResult DeleteProduct(int productId)
         {
@@ -410,7 +410,7 @@ namespace foodapp.webui.Controllers
 
             return RedirectToAction("ProductList");
         }
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles="admin")]
         [HttpPost]
         public IActionResult Approve(int productId)
         {
@@ -460,7 +460,7 @@ namespace foodapp.webui.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles="admin")]
 
         public IActionResult CreateCategory()
         {
@@ -496,7 +496,7 @@ namespace foodapp.webui.Controllers
             return View(model);
         }
 
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles="admin")]
 
         [HttpGet]
         public IActionResult EditCategory(int? id)
@@ -550,7 +550,7 @@ namespace foodapp.webui.Controllers
 
         }
 
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles="admin")]
 
         [HttpPost]
         public IActionResult DeleteCategory(int categoryId)
