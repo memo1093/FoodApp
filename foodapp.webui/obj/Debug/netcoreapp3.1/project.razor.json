@@ -14417,6 +14417,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Admin\\CreateRole.cshtml",
+      "TargetPath": "Views\\Admin\\CreateRole.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Account\\ForgotPassword.cshtml",
+      "TargetPath": "Views\\Account\\ForgotPassword.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Admin\\CreateCategory.cshtml",
       "TargetPath": "Views\\Admin\\CreateCategory.cshtml",
       "FileKind": "mvc"
@@ -14424,6 +14434,11 @@
     {
       "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Shared\\_products.cshtml",
       "TargetPath": "Views\\Shared\\_products.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Admin\\EditUser.cshtml",
+      "TargetPath": "Views\\Admin\\EditUser.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14442,6 +14457,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Account\\AccessDenied.cshtml",
+      "TargetPath": "Views\\Account\\AccessDenied.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Admin\\CategoryList.cshtml",
       "TargetPath": "Views\\Admin\\CategoryList.cshtml",
       "FileKind": "mvc"
@@ -14449,6 +14469,11 @@
     {
       "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Admin\\EditRole.cshtml",
+      "TargetPath": "Views\\Admin\\EditRole.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14469,6 +14494,21 @@
     {
       "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Admin\\CreateProduct.cshtml",
       "TargetPath": "Views\\Admin\\CreateProduct.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Account\\ResetPassword.cshtml",
+      "TargetPath": "Views\\Account\\ResetPassword.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Admin\\UserList.cshtml",
+      "TargetPath": "Views\\Admin\\UserList.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Admin\\RolesList.cshtml",
+      "TargetPath": "Views\\Admin\\RolesList.cshtml",
       "FileKind": "mvc"
     },
     {

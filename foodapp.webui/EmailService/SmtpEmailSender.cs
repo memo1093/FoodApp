@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace foodapp.webui.EmailService
 {
-    public class SmtpEmailSender : EmailSender
+    public class SmtpEmailSender:IEmailSender
     {
         private string _host;
         private int _port;

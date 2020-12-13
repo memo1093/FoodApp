@@ -1,11 +1,13 @@
 <nav id="navbarMain" class="navbar navbar-expand navbar-dark navbar-fixed bg-success border-bottom fixed-top">
             <div class="container">
                 <a href="/" class="navbar-brand">Bazlama</a>
-                @if (User.Identity.IsAuthenticated)
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                 {
                  <ul class="navbar-nav">
                     <li class="nav-item mr-2"> <a asp-controller="admin" asp-action="Createproduct" class="nav-link">Ürün Oluştur</a> </li>
                     <li class="nav-item mr-2"> <a asp-controller="admin" asp-action="products" class="nav-link">Ürün Listesi</a> </li>
+                    
+                    
                 </ul>
                 }
                 
@@ -14,6 +16,11 @@
                     </li>
                     <li class="nav-item"><a href="#products" class="nav-link">Ürünler</a>
                     </li>
+                    @if (User.IsInRole("Master"))
+                        {
+                            <li class="nav-item mr-2"> <a asp-controller="admin" asp-action="RolesList" class="nav-link">Rol Listesi</a> </li>
+                            <li class="nav-item mr-2"> <a asp-controller="admin" asp-action="UserList" class="nav-link">Kullanıcı Listesi</a> </li>
+                        }
                     <li class="nav-item" id="hideOnSmall">
                         <a href="#why" class="nav-link">Neden<span id="hideOnSmall"> Almalıyım</span>?</a>
                     </li>

@@ -1,5 +1,7 @@
 using System;
 using System.Threading.Tasks;
+using foodapp.webui.EmailService;
+using foodapp.webui.Extensions;
 using foodapp.webui.Identity;
 using foodapp.webui.Models;
 using Microsoft.AspNetCore.Identity;
@@ -8,14 +10,18 @@ using Newtonsoft.Json;
 
 namespace foodapp.webui.Controllers
 {
+
+
     public class AccountController : Controller
     {
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        private IEmailSender _emailSender;
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailSender = emailSender;
         }
 
         [HttpGet]
@@ -44,7 +50,7 @@ namespace foodapp.webui.Controllers
             if (!await _userManager.IsEmailConfirmedAsync(user))
             {
                 ModelState.AddModelError("", "Lütfen email hesabınıza gelen link ile mail hesabınızı onaylayınız.");
-            return View();
+                return View();
             }
 
             if (result.Succeeded)
@@ -89,13 +95,101 @@ namespace foodapp.webui.Controllers
                     _token = token
                 });
                 Console.WriteLine(url);
-                
+
                 //email
+                await _emailSender.SendEmailAsync(model.Email, "Hesap Onay Kodu", $"Hesabınızı onaylamak için <a href='https://localhost:5001{url}' >linke</a> tıklayınız.");
 
 
+
+                TempData.Put("message", new AlertMessage
+                    {
+                        Title = "Aktivasyon",
+                        Message = $"{model.Email} adresine onay maili gönderilecektir. Hesap onaylandığı an giriş yapabilirsiniz.",
+                        AlertType = "alert-success"
+                    });
                 return RedirectToAction("Login", "Account");
             }
             ModelState.AddModelError("", "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz");
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                ModelState.AddModelError("email", "Email bulunamadı");
+                return View();
+            }
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("user", "Kullanıcı bulunamadı");
+                return View();
+            }
+            //generate token
+            var _token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var url = Url.Action("ResetPassword", "Account", new
+            {
+                userId = user.Id,
+                token = _token
+            });
+
+            //send email
+            //email
+            await _emailSender.SendEmailAsync(email, "Şifre Sıfırlama Kodu", $"Parolanızı yenilemek için <a href='https://localhost:5001{url}' >linke</a> tıklayınız.");
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword(string userId, string token)
+        {
+            if (userId == null || token == null)
+            {
+                TempData.Put("message", new AlertMessage
+                    {
+                        Title = "Yanlış link",
+                        Message = $"Yanlış link bilgisi. Lütfen linkin bizim tarafımızca gönderildiğinden emin olun",
+                        AlertType = "alert-warning"
+                    });
+                
+                return RedirectToAction("ForgotPassword", "Account");
+            }
+
+            var model = new ResetPasswordModel { Token = token };
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                TempData.Put("message", new AlertMessage
+                    {
+                        Title = "Hata",
+                        Message = $"Bu kullanıcı kayıtlı değil",
+                        AlertType = "alert-success"
+                    });
+                
+                return RedirectToAction("Login", "Account");
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View(model);
         }
 
@@ -109,7 +203,13 @@ namespace foodapp.webui.Controllers
         {
             if (_userId == null || _token == null)
             {
-                CreateMessage("Geçersiz kullanıcı");
+                TempData.Put("message", new AlertMessage
+                    {
+                        Title = "Aktivasyon",
+                        Message = "Geçersiz Kullanıcı",
+                        AlertType = "alert-danger"
+                    });
+                
             }
             var user = await _userManager.FindByIdAsync(_userId);
             if (user != null)
@@ -117,23 +217,19 @@ namespace foodapp.webui.Controllers
                 var result = await _userManager.ConfirmEmailAsync(user, _token);
                 if (result.Succeeded)
                 {
-                    CreateMessage($"Merhaba {user.FirstName}! Hesabınız başarıyla onaylandı","alert-success");
-                    return View();
+                    TempData.Put("message", new AlertMessage
+                    {
+                        Title = "Hesap Onaylandı",
+                        Message = " Hesabınız başarıyla onaylandı. Şimdi giriş yapabilirsiniz.",
+                        AlertType = "alert-success"
+                    });
                 }
 
             }
-            CreateMessage("Hesabınız onaylanmadı");
-            TempData["message"] = "Hesabınız onaylanmadı";
+            
+            
             return View();
         }
-         private void CreateMessage(string message, string alertType = "alert-danger")
-        {
-            var msg = new AlertMessage()
-            {
-                Message = message,
-                AlertType = alertType
-            };
-            TempData["message"] = JsonConvert.SerializeObject(msg);
-        }
+
     }
 }

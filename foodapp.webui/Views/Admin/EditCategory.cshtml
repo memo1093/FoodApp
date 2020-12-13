@@ -11,7 +11,7 @@
 <hr>
 <div class="row">
     <div class="col-md-5">
-         @await Html.PartialAsync("_messages")
+        <partial name="_messages" model="@(TempData.Get<AlertMessage>("message"))" />
         <form asp-controller="admin" asp-action="Editcategory" method="POST">
             <input type="hidden" name="CategoryId" value="@Model.CategoryId">
             <div class="container">
@@ -38,6 +38,7 @@
                 <button class="btn btn-primary" type="submit">Kategori türünü
                     Kaydet</button>
             </div>
+            
             @if (@Model.ProductsInThisCategory.Count>0)
             {
                 <div id="products">
@@ -49,6 +50,7 @@
                     }
             </div>
             }
+            
             
 
         </form>

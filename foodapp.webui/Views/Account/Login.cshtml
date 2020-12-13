@@ -10,7 +10,7 @@
     <div class="container">
         
         <h1 class="h3 my-4">Giriş Yap</h1>
-        @await Html.PartialAsync("_messages")
+        <partial name="_messages" model="@(TempData.Get<AlertMessage>("message"))" />
         
         <div class="form-group">
            
@@ -36,7 +36,13 @@
                 <input asp-for="Password" type="password" class="form-control">
                     <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            <div class="col-sm-5 my-2"><a asp-controller="Account" asp-action="Register">Kayıt ol</a></div>
+           
+            <div class="col-sm-5 my-2">
+                <a asp-controller="Account" asp-action="Register">Kayıt ol</a>
+                <span> | </span>
+                <a asp-controller="Account" asp-action="ForgotPassword">Şifremi Unuttum</a>
+            </div>
+            
         </div>
         
         

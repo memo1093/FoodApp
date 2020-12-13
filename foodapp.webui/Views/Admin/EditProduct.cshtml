@@ -16,7 +16,7 @@
     <div class="container">
         <h1 class="h3 my-4">Ürünü Düzenle</h1>
         
-        @await Html.PartialAsync("_messages")
+        <partial name="_messages" model="@(TempData.Get<AlertMessage>("message"))" />
         <div class="form-group row">
             <label asp-for="Name" class="col-sm-2 col-form-label mb-2"></label>
             <div class="col-sm-10">
@@ -43,6 +43,7 @@
         {
             <input type="hidden" name="@Model.SelectedCategories[@i].CategoryId" value="@Model.SelectedCategories[@i].CategoryId">
             <input type="hidden" name="@Model.SelectedCategories[@i].Name" value="@Model.SelectedCategories[@i].Name">
+            <span asp-validation-for=CategoryId></span>
 
         }
         @foreach (var category in (@List<Category>)ViewBag.Categories)

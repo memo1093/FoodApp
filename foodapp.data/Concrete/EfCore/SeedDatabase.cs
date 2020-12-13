@@ -34,7 +34,14 @@ namespace foodapp.data.Concrete.EfCore
         private static Product[] Products={
             new Product(){Name="Bazlama",CategoryId=1,Price=3.5,IsApproved=true,ImageUrl="1.jpg"},
             new Product(){Name="Gözleme(Sade)",CategoryId=2,Price=3,IsApproved=true,ImageUrl="2.jpg"},
-            new Product(){Name="Gözleme(Peynirli)",CategoryId=2,Price=3.5,IsApproved=true,ImageUrl="3.jpg"}
+            new Product(){Name="Gözleme(Peynirli)",CategoryId=2,Price=3.5,IsApproved=true,ImageUrl="3.jpg"},
+            new Product(){Name="Gözleme(Patatesli)",CategoryId=2,Price=3.5,IsApproved=true,ImageUrl="4.jpg"},
+            new Product(){Name="Gözleme(Ispanaklı)",CategoryId=2,Price=3.5,IsApproved=true,ImageUrl="5.jpg"},
+            new Product(){Name="Gözleme(Kıymalı)",CategoryId=2,Price=3.5,IsApproved=true,ImageUrl="6.jpg"},
+            new Product(){Name="Gözleme(Patlıcanlı)",CategoryId=2,Price=3.5,IsApproved=true,ImageUrl="7.jpg"},
+            new Product(){Name="Sütlü Çörek",CategoryId=3,Price=3.5,IsApproved=true,ImageUrl="8.jpg"},
+            new Product(){Name="Cevizli Kömeç",CategoryId=3,Price=3.5,IsApproved=true,ImageUrl="9.jpg"},
+            new Product(){Name="Erişte(500gr)",CategoryId=4,Price=3.5,IsApproved=true,ImageUrl="10.jpg"}
         };
     }
 }
