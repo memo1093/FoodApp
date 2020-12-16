@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using foodapp.business.Abstract;
 using foodapp.webui.EmailService;
 using foodapp.webui.Extensions;
 using foodapp.webui.Identity;
@@ -17,11 +18,13 @@ namespace foodapp.webui.Controllers
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
         private IEmailSender _emailSender;
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IEmailSender emailSender)
+        private ICartService _icartService;
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IEmailSender emailSender,ICartService icartService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _icartService=icartService;
         }
 
         [HttpGet]
@@ -218,6 +221,7 @@ namespace foodapp.webui.Controllers
                 var result = await _userManager.ConfirmEmailAsync(user, _token);
                 if (result.Succeeded)
                 {
+                    _icartService.InitializeCart(user.Id);
                     TempData.Put("message", new AlertMessage
                     {
                         Title = "Hesap Onaylandı",

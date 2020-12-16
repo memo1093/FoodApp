@@ -17,7 +17,7 @@
         <div class="collapse multi-collapse bg-light my-4"
                         id="collapsable-@category.CategoryId">
 
-                        <form action="">
+                        <form asp-action="AddtoCart" asp-controller="Cart" method="POST">
                             
                             @foreach (var product in products)
                             {
@@ -33,13 +33,6 @@
                                 
                                                                
                             }
-
-                           <div class="row justify-content-center">
-                               <div class="col-auto">
-                                   <button class="btn btn-outline-info float-right my-2"
-                             asp-controller="shop" asp-action="addtocart">Sepete Ekle</button>
-                               </div>
-                           </div>
                             
                         </form>
                     </div>

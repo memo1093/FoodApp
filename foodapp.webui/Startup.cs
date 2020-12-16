@@ -68,9 +68,11 @@ namespace foodapp.webui
 
             services.AddScoped<IProductRepository,EfCoreProductRepository>();
             services.AddScoped<ICategoryRepository,EfCoreCategoryRepository>();
+            services.AddScoped<ICartRepository,EfCoreCartRepository>();
 
             services.AddScoped<IProductService,ProductManager>();
             services.AddScoped<ICategoryService,CategoryManager>();
+            services.AddScoped<ICartService,CartManager>();
 
             services.AddScoped<IEmailSender,SmtpEmailSender>(i=>
             new SmtpEmailSender(
@@ -221,6 +223,15 @@ namespace foodapp.webui
                     name:"products",
                     pattern:"products",
                     defaults:new {controller="Shop",action="list"}
+                );
+            });
+            app.UseEndpoints(endpoint=>
+            {
+                
+                endpoint.MapControllerRoute(
+                    name:"cart",
+                    pattern:"cart",
+                    defaults:new {controller="Cart",action="Index"}
                 );
             });
 

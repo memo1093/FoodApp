@@ -14397,6 +14397,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Cart\\Index.cshtml",
+      "TargetPath": "Views\\Cart\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Shared\\_navbarRegister.cshtml",
       "TargetPath": "Views\\Shared\\_navbarRegister.cshtml",
       "FileKind": "mvc"
