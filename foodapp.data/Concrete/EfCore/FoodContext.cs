@@ -8,6 +8,8 @@ namespace foodapp.data.Concrete.EfCore
         private string _connectionString = @"server=localhost;port=3306;user=root;password=Mysql-1234;database=FoodDb";
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
