@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using foodapp.business.Abstract;
 using foodapp.business.Concrete;
 using foodapp.data.Abstract;
@@ -89,7 +90,7 @@ namespace foodapp.webui
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IConfiguration configuration,UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IConfiguration configuration,UserManager<User> userManager, RoleManager<IdentityRole> roleManager,ICartService cartService)
         {
             if (env.IsDevelopment()) 
             {
@@ -110,8 +111,16 @@ namespace foodapp.webui
             app.UseRouting();
 
             app.UseAuthorization();
-            SeedIdentity.Seed(userManager,roleManager,configuration).Wait();
+            SeedIdentity.Seed(userManager,roleManager,configuration,cartService).Wait();
 
+
+            var cultureInfo = new CultureInfo("tr-TR");
+            cultureInfo.NumberFormat.CurrencySymbol="₺";
+
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            
             app.UseEndpoints(endpoint=>
             {
                 

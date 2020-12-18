@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-horizontal">
                 <div class="img-square-wrapper">
-                    <img src="~/img/Products/@Model.ImageUrl" class="img-fluid"
+                    <img src="~/img/Products/@Model.ImageUrl" style="width: 200px; height:150px" class="img-fluid"
                         alt="" srcset="">
                 </div>
                 <div class="card-body">
@@ -13,23 +13,88 @@
                     <h5 class="card-title text-dark">
                         @Model.Name</h5>
                     <p class="card-text text-dark">
-                        @Model.Price &#8378</p>
+                        @Model.Price TL</p>
                     <div class="input-group float-right my-2">
 
                         <div class="input-group-prepend">
                             <button class="btn btn-info btn-sm text-light"
-                                id="minus-@Model.ProductId">-</button>
+                                id="minus-@Model.ProductId"><i class="fas fa-minus"></i></button>
                         </div>
-                        <input type="number" class="form-control input-sm"
-                            id="quantity-@Model.ProductId" value="1" min="1"
+                        <input type="text" class="form-control input-sm" onkeypress="return isNumber(event)"
+                            id="quantity-@Model.ProductId" name="quantity" value="1" min="1" max="100"
                             step="1">
                         <div class="input-group-append">
                             <button class="btn btn-info btn-sm text-light"
-                                id="plus-@Model.ProductId">+</button>
+                                id="plus-@Model.ProductId"><i class="fas fa-plus"></i></button>
                         </div>
-                        <input type="hidden" name="productId"
+                        <input type="hidden" name="productId" id="productId-@Model.ProductId"
                             value="@Model.ProductId">
-                        <input type="hidden" name="quantity" value="1">
+                            <script>
+                                $(document).ready(function () {
+                                        
+                                            $("#plus-@Model.ProductId").click(function (e) { 
+                                                let quantity=$("#quantity-@Model.ProductId").val();
+                                                quantity++;
+                                                if (quantity>=100) {
+                                                    quantity=99;
+                                                }
+                                                $("#quantity-@Model.ProductId").val(quantity);
+                                                e.preventDefault();
+                                            });
+                                            $("#minus-@Model.ProductId").click(function (e) { 
+                                                let quantity=$("#quantity-@Model.ProductId").val();
+                                                quantity--;
+                                                if (quantity<=0) {
+                                                    quantity=1;
+                                                }
+                                                $("#quantity-@Model.ProductId").val(quantity);
+                                                e.preventDefault();
+                                            });
+
+
+                                        
+                                    
+                                $("#addToCart-@Model.ProductId").click(function(e){
+                                    const productId=$("#productId-@Model.ProductId").val();
+                                    const quantity=$("#quantity-@Model.ProductId").val();
+                                    var data = {"ProductId" : productId, "Quantity" : quantity};
+                                    
+                                        console.log('data :>> ', data);
+                                    $.ajax({
+                                      async:true,
+                                      type: "POST",
+                                      url: "/Cart/AddtoCart",
+                                      data: data,
+                                      dataType:"JSON",
+                                      success: function (response) {
+                                      }
+                                     }).always(function () {
+
+                                         $.ajax({
+                                             type: "GET",
+                                             url: "/cart",
+                                             success: function (response) {
+                                                 if (response.match(/productInCart/gm)==null) {
+                                                     $("#notification").css("display", "none");
+                                                 }else{
+                                                     $("#notification").css("display", "inline");
+                                                 notification = response.match(/productInCart/gm).length;
+                                                                           $("#notification").html(notification);
+                                                  }
+                                              }
+                                          });
+
+
+                                        });
+                                    e.preventDefault();
+                                })
+
+                                });
+                                   
+                            </script>
+                            
+                           
+                        
                     </div>
                 </div>
             </div>
@@ -49,7 +114,7 @@
                 <div>
                     <div class="col-auto">
                         <button class="btn btn-outline-info float-right my-2"
-                            type="submit" AutoPostBack="false">Sepete Ekle</button>
+                            type="submit" id="addToCart-@Model.ProductId">Sepete Ekle</button>
                     </div>
                 </div>
             }

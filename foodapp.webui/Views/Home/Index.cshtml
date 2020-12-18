@@ -3,6 +3,7 @@
     Layout="_Layout";
     var categories = Model.Categories;
     var products = Model.Products;
+   
 }
 
 @await Html.PartialAsync("_navbar")
@@ -17,7 +18,7 @@
         <div class="collapse multi-collapse bg-light my-4"
                         id="collapsable-@category.CategoryId">
 
-                        <form asp-action="AddtoCart" asp-controller="Cart" method="POST">
+                        <form method="POST">
                             
                             @foreach (var product in products)
                             {
@@ -59,5 +60,10 @@
 </div>
 
 </main>
+
+
+@section Scripts{
+    <script src="~/js/data.js"></script>
+}
 
 

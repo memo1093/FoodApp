@@ -1,3 +1,5 @@
+
+
 <nav id="navbarMain" class="navbar navbar-expand navbar-dark navbar-fixed bg-success border-bottom fixed-top">
             <div class="container">
                 <a href="/" class="navbar-brand">Bazlama</a>
@@ -6,6 +8,7 @@
                  <ul class="navbar-nav">
                     <li class="nav-item mr-2"> <a asp-controller="admin" asp-action="Createproduct" class="nav-link">Ürün Oluştur</a> </li>
                     <li class="nav-item mr-2"> <a asp-controller="admin" asp-action="products" class="nav-link">Ürün Listesi</a> </li>
+                    <li class="nav-item mr-2"> <a asp-controller="admin" asp-action="categories" class="nav-link">Kategori Listesi</a> </li>
                     
                     
                 </ul>
@@ -26,7 +29,7 @@
                     </li>
                     <li class="nav-item">
                         <a asp-controller="Cart" asp-action="Index" class="nav-link text-light" id="cart" data-toggle="tooltip" data-placement="top" title="Sepetim"><i
-                                class="fas fa-shopping-cart"></i></a>
+                                class="fas fa-shopping-cart"></i><span class="badge" id="notification"></span></a>
                     </li>
                     <li class="nav-item dropdown">
                 <a class="nav-link text-light" id="user" data-toggle="dropdown"

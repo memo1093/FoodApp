@@ -12,6 +12,7 @@
                 <li class="nav-item mr-2"> <a asp-controller="admin"
                         asp-action="products" class="nav-link">Ürün Listesi</a>
                 </li>
+                <li class="nav-item mr-2"> <a asp-controller="admin" asp-action="categories" class="nav-link">Kategori Listesi</a> </li>
             </ul>
         }
 
@@ -22,16 +23,17 @@
            {
                <li class="nav-item mr-2"> <a asp-controller="admin" asp-action="RolesList" class="nav-link">Rol Listesi</a> </li>
                <li class="nav-item mr-2"> <a asp-controller="admin" asp-action="UserList" class="nav-link">Kullanıcı Listesi</a> </li>
+               
            }
             </li>
             <li class="nav-item"><a href="~/Home/Index#products"
                     class="nav-link">Ürünler</a>
             </li>
             <li class="nav-item">
-                <a asp-controller="shop" asp-action="list"
+                <a asp-controller="Cart" asp-action="Index"
                     class="nav-link text-light" id="cart" data-toggle="tooltip"
                     data-placement="top" title="Sepetim"><i
-                        class="fas fa-shopping-cart"></i></a>
+                        class="fas fa-shopping-cart"></i><span class="badge" id="notification"></span></a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link text-light" id="user" data-toggle="dropdown"
@@ -66,3 +68,5 @@
             </ul>
         </div>
     </nav>
+
+    

@@ -50,5 +50,17 @@ namespace foodapp.webui.Controllers
             _cartService.DeleteFromCart(productId,userId);
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public IActionResult DeleteAllFromCart(int[] productIds)
+        {
+            var userId= _userManager.GetUserId(User);
+            foreach (var productId in productIds)
+            {
+                _cartService.DeleteFromCart(productId,userId);
+            
+            }
+            return RedirectToAction("Index");
+            
+        }
     }
 }

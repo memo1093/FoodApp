@@ -417,7 +417,7 @@ namespace foodapp.webui.Controllers
             var entity = _productService.GetById(productId);
             bool approveAction = false;
 
-            if (entity != null)
+            if (entity != null && entity.CategoryId!=null)
             {
                 if (entity.IsApproved)
                 {
@@ -443,11 +443,18 @@ namespace foodapp.webui.Controllers
                         AlertType = "alert-warning"
                     });
                 }
-
+                return RedirectToAction("ProductList");
 
             }
+            TempData.Put("message", new AlertMessage
+                    {
+                        Title = $"{entity.Name} isimli ürün onay sorunu.",
+                        Message = $"{entity.Name} isimli ürün onayı başarısız oldu! Ürün kayıtlı olmayabilir ya da ait olduğu bir kategorisi yok.",
+                        AlertType = "alert-danger"
+                    });
 
             return RedirectToAction("ProductList");
+            
         }
         public IActionResult CategoryList()
         {

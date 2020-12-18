@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using foodapp.business.Abstract;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 
@@ -6,7 +7,7 @@ namespace foodapp.webui.Identity
 {
     public static class SeedIdentity
     {
-        public static async Task Seed(UserManager<User> userManager, RoleManager<IdentityRole> roleManager,IConfiguration configuration)
+        public static async Task Seed(UserManager<User> userManager, RoleManager<IdentityRole> roleManager,IConfiguration configuration,ICartService _icartService)
         {
             var username = configuration["Data:AdminUser:username"];
             var password = configuration["Data:AdminUser:password"];
@@ -34,7 +35,9 @@ namespace foodapp.webui.Identity
                 var result = await userManager.CreateAsync(user,password);
                 if (result.Succeeded)
                 {
+                    
                     await userManager.AddToRolesAsync(user,adminroles);
+                    _icartService.InitializeCart(user.Id);
                 }
 
                 

@@ -7,34 +7,36 @@
 }
 @await Html.PartialAsync("_navbar2")
 
-<div class="container-fluid my-4">
+<div class="container my-4">
     <h4>Sepetim</h4>
     <div class="row">
         @if (Model.CartItems.Count==0)
         {
-            <div class="col-md-12">
+            <div class="col-md-9">
                 <div class="alert alert-danger">Sepetiniz Boş</div>
             </div>
         }
-        <div class="col-md-8">
-            <table class="table table-hover table-responsive">
+        @if (Model.CartItems.Count>0)
+        {
+            <div class="col-md-8">
+            <table class="table table-hover table-responsive table-borderless">
                 <thead>
                     <th></th>
-                    <th class="col">Ürün Adı</th>
-                    <th class="col">Ürün Fiyatı</th>
-                    <th class="col">Miktarı</th>
-                    <th class="col">Toplam</th>
+                    <th >Ürün Adı</th>
+                    <th >Ürün Fiyatı</th>
+                    <th >Miktarı</th>
+                    <th >Toplam Fiyat</th>
                 </thead>
                 <tbody>
                     @foreach (var item in @Model.CartItems)
                     {
-                        <tr>
+                        <tr class="productInCart">
                             <td><img src="~/img/Products/@item.ImageUrl"
                                     style="max-width: 100px;" alt=""></td>
                             <td>@item.Name</td>
                             <td>@item.Price</td>
                             <td>@item.Quantity</td>
-                            <td>@(item.Quantity*item.Price)</td>
+                            <td>@(item.Quantity*item.Price) TL</td>
                             <td>
                                 <form asp-action="DeleteFromCart" asp-controller="Cart" method="post">
                                     <td>
@@ -47,28 +49,47 @@
                                 
                         </tr>
                     }
-
+                    
                 </tbody>
             </table>
+            <table>
+                   <tbody>
+                          <tr>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td>
+                                     <form asp-action="DeleteAllFromCart" asp-controller="Cart"  method="POST">
+                                         @foreach (var item in @Model.CartItems)
+                                         {
+                                             <input type="hidden" name="productIds" value="@item.ProductId">
+                                         }
+                                          <button type="submit" class="btn btn-danger">Hepsini Kaldır</button>
+                                          </form>
+                                 </td>
+                          </tr>
+                   </tbody>
+            </table>
+            
         </div>
         <div class="col-md-4">
-            <table class="table">
+            <table class="table table-borderless">
                 <tbody>
                     <tr>
                         <th class="h4">Sepet Tutarı</th>
-                        <td class="h6">@Model.CartTotal().ToString("c")</td>
+                        <td class="h5">@Model.CartTotal() TL</td>
                         
                        
                     </tr>
                     <tr>
                         <th class="h4">Kargo Tutarı</th>
-                        <td class="h6">@cargoPrice.ToString("c")</td>
+                        <td class="h5">@cargoPrice TL</td>
                         
                     </tr>
                     
                      <tr>
-                        <td class="h4 text-danger">Toplam Tutar</td>
-                        <td class="h6 text-danger">@totalPrice.ToString("c")</td>
+                        <td class="h4 text-info">Toplam Tutar</td>
+                        <td class="h5 text-info">@totalPrice TL</td>
                         
                     </tr>
                     
@@ -79,7 +100,12 @@
                 </tbody>
             </table>
         </div>
+        }
+        
     </div>
 </div>
 
-<h1></h1>
+
+@section Scripts{
+    <script src="~/js/data.js"></script>
+}

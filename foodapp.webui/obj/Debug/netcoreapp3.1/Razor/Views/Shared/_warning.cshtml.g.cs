@@ -62,7 +62,7 @@ using Newtonsoft.Json;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2ca8afdf9ecd29ed199656fc70494c48442329ec", @"/Views/Shared/_warning.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"6b509855d0ea683cd5e133889033cce2808630b4", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"792e53754977ff9e2b5ae4b755dd1b7490f297aa", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__warning : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
