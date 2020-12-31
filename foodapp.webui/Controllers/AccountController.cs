@@ -30,6 +30,16 @@ namespace foodapp.webui.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                TempData.Put("message", new AlertMessage
+                    {
+                        Title = "",
+                        Message = "Zaten giriş yaptınız.",
+                        AlertType = "alert-warning"
+                    });
+                return RedirectToAction("Index","Home");
+            }
             return View(new LoginModel() { ReturnUrl = returnUrl });
         }
 
@@ -67,6 +77,18 @@ namespace foodapp.webui.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                TempData.Put("message", new AlertMessage
+                    {
+                        Title = "",
+                        Message = $"Zaten aktif bir hesabınız mevcut.",
+                        AlertType = "alert-warning"
+                    });
+                    return RedirectToAction("Index","Home");
+                
+            }
+            
             return View();
         }
 
@@ -119,6 +141,17 @@ namespace foodapp.webui.Controllers
         [HttpGet]
         public IActionResult ForgotPassword()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                TempData.Put("message", new AlertMessage
+                    {
+                        Title = "",
+                        Message = "Zaten giriş yaptınız.",
+                        AlertType = "alert-warning"
+                    });
+                    return RedirectToAction("Index","Home");
+                
+            }
             return View();
         } 
         [HttpPost]
@@ -154,6 +187,17 @@ namespace foodapp.webui.Controllers
         [HttpGet]
         public IActionResult ResetPassword(string userId, string token)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                TempData.Put("message", new AlertMessage
+                    {
+                        Title = "",
+                        Message = "Zaten giriş yaptınız.",
+                        AlertType = "alert-warning"
+                    });
+                    return RedirectToAction("Index","Home");
+                
+            }
             if (userId == null || token == null)
             {
                 TempData.Put("message", new AlertMessage
@@ -200,6 +244,17 @@ namespace foodapp.webui.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                TempData.Put("message", new AlertMessage
+                    {
+                        Title = "",
+                        Message = $"Mevcut hesap bulunmamaktadır.",
+                        AlertType = "alert-warning"
+                    });
+                    return RedirectToAction("Index","Home");
+                
+            }
             await _signInManager.SignOutAsync();
             return Redirect("~/");
         }
@@ -233,6 +288,10 @@ namespace foodapp.webui.Controllers
             }
             
             
+            return View();
+        }
+        public IActionResult AccessDenied()
+        {
             return View();
         }
 

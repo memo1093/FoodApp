@@ -6,6 +6,7 @@ namespace foodapp.entity
     {
         public int Id { get; set; }
         public string UserId { get; set; }
+        public double CargoPrice { get; set; }
         public List<CartItem> CartItems { get; set; }
     }
 }

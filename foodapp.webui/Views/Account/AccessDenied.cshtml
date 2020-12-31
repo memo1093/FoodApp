@@ -1,6 +1,20 @@
 @{
     Layout = "_Layout";
 }
+@await Html.PartialAsync("_navbarRegister");
 
 
-<h1>Yetkisiz alana giriş yaptınız.</h1>
+<div class="container mt-5">
+    <h3 class="text-secondary">Yetkisiz Alana Giriş Yapmaya Çalıştınız. Anasayfaya yönlendiriliyorsunuz...</h3>
+</div>
+
+
+
+
+@section Scripts{
+    <script>
+        window.setTimeout(function(){
+        window.location.href='/';
+        }, 3000);
+    </script>
+}

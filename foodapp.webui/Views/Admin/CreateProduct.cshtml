@@ -30,20 +30,19 @@
                     <span asp-validation-for="Price" class="text-danger my-2"></span>
             </div>
             
-                    
+            <div class="custom-file input-group">
                     <label asp-for="ImageUrl"
                         class="col-sm-2 col-form-label mb-2"></label>
-                        <div class="col-sm-10">
-                    
                         <input asp-for="ImageUrl" type="hidden">
-                        <input type="file" name="file">
+                        <input type="file" name="file" class="ml-2"  >
+            </div> 
+                    
                         
                         
                     
             </div>
-        </div>
-        
-         @foreach (var category in (@List<Category>)ViewBag.Categories)
+            <div class="col-sm-10">
+            @foreach (var category in (@List<Category>)ViewBag.Categories)
         {
             <div class="custom-control custom-radio">
                     <input type="radio" 
@@ -57,12 +56,20 @@
                     <label class="custom-control-label" for="category-@(category.CategoryId)">@category.Name</label>
                 </div>
         }
+        </div>
+        <button class="btn btn-primary my-4 float-right" type="submit">Ürünü Kaydet</button>
+       
+        </div>
+
+        
+         
         
         
         
         
-       <button class="btn btn-primary my-4" type="submit">Ürünü Kaydet</button>
+       
     </div>
+     
 
 </form>
 

@@ -98,3 +98,9 @@ C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Admin\UserList.cshtml.g.cs
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditUser.cshtml.g.cs
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Index.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Checkout.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\Iyzipay.dll
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Success.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Order\Orders.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Admin\GetAllOrders.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_warning2.cshtml.g.cs

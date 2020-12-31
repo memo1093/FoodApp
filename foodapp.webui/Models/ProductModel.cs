@@ -11,9 +11,9 @@ namespace foodapp.webui.Models
         [StringLength(50,MinimumLength=4,ErrorMessage="Ürün adı 4 ile 50 karakter arasında girilmelidir.")]
         [Required(ErrorMessage="Ürün adı girilmelidir.")]
         public string Name { get; set; }
-        [Display(Name="Ürün Fiyatı (₺) ",Prompt="3.50")]
+        [Display(Name="Ürün Fiyatı (₺) ",Prompt="3.500")]
         [Required(ErrorMessage="Ürün Fiyatı girilmelidir.")]
-        [Range(0.50,10000,ErrorMessage="0.50 ile 10.000 arasında bir değer girilmelidir.")]
+        [DataType(DataType.Currency,ErrorMessage="Ürün fiyatı sayı tipinde olmalıdır.")]
         public double? Price { get; set; }
         [Display(Name="Onaylı mı?",Prompt="Hayır")]
         public bool IsApproved { get; set; }

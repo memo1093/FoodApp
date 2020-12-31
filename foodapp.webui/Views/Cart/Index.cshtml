@@ -2,7 +2,7 @@
 
 @{
     Layout = "_Layout";
-    var cargoPrice= 7.00;
+    var cargoPrice= Model.CargoPrice;
     var totalPrice = Model.CartTotal()+cargoPrice;
 }
 @await Html.PartialAsync("_navbar2")
@@ -13,7 +13,8 @@
         @if (Model.CartItems.Count==0)
         {
             <div class="col-md-9">
-                <div class="alert alert-danger">Sepetiniz Boş</div>
+                <partial name="_messages" model="@(TempData.Get<AlertMessage>("message"))" />
+                <div class="alert alert-danger">Sepetiniz Boş. Ürünlere göz atmak için <a href="/#products">linke</a> tıklayın.</div>
             </div>
         }
         @if (Model.CartItems.Count>0)
@@ -95,7 +96,7 @@
                     
                     <tr>
                         <th></th>
-                         <td><button asp-controller="shop" asp-action="order" class="btn btn-primary">Alışverişi Tamamla</button></td>
+                         <td><a asp-controller="cart" asp-action="checkout" class="btn btn-success">Alışverişi Tamamla</a></td>
                     </tr>
                 </tbody>
             </table>

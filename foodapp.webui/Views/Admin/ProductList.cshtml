@@ -20,13 +20,13 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Resim Url'si</th>
+                    <th scope="col">Ürün Resmi</th>
                     <th scope="col">İsim</th>
                     <th scope="col">Fiyat</th>
                     <th scope="col">Onaylı mı?</th>
                     <th scope="col">Kategorisi</th>
                     <th scope="col">İşlemler</th>
+                    <th scope="col"><a asp-controller="admin" asp-action="Createproduct" class="btn btn-primary">Yeni ürün ekle</a></th>
                     
                 </tr>
             </thead>
@@ -38,8 +38,7 @@
                 @foreach (var product in products)
                 {
                     <tr>
-                    <th scope="row">@product.ProductId</th>
-                    <td><img src="~/img/Products/@product.ImageUrl" class="img-thumbnail" style="max-width: 200px; max-height:200px;" alt=""></td>
+                    <td><img src="~/img/Products/@product.ImageUrl" class="img-thumbnail" style="width:100px; height:70px;" alt="@product.Name"></td>
                     <td>@product.Name</td>
                     <td>@product.Price &#8378</td>
                     <td>
@@ -81,15 +80,7 @@
                     </td>
                     </tr>
                 }
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a asp-controller="admin" asp-action="CategoryList" class="btn btn-outline-primary btn-sm">Kategori işlemleri</a></td>
-                    <td><a asp-controller="admin" asp-action="Createproduct" class="btn btn-primary">Yeni ürün ekle</a></td>
-                </tr>
+                
                     
                 
                 

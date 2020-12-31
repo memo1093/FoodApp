@@ -9,5 +9,6 @@ namespace foodapp.business.Abstract
 
         void AddToCart(string userId, int productId, int quantity);
         void DeleteFromCart(int productId, string userId);
+        void ClearCart(int cartId);
     }
 }

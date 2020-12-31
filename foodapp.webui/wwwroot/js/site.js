@@ -4,11 +4,41 @@
 
 
 // Write your JavaScript code.
-var x = window.matchMedia("(max-width: 700px)");
-if (x.matches) {
-    $("#hideOnSmall").hide(); 
-}
+$(document).ready(function () {
+    var large = window.matchMedia("(max-width: 1024px)");
+    if (large.matches) {
+    
+        $(".card-horizontal").removeAttr("class");//+
+        
+        
+        
+        $(".changingImage").removeClass("img-fluid");
+        $(".changingImage").addClass("img-top");
+        $(".changingImage").attr("style","width:100%;");
+    
+    }
+
+    var medium = window.matchMedia("(max-width: 768px)");
+    if (medium.matches) {
+    
+        
+    
+    }
+
+    
+    
+    var small = window.matchMedia("(max-width: 576px");
+    if (small.matches) {
+        $(".hideOnSmall").hide(); 
+        
+        
+        
+    }
+    
+});
+
 $('.product-card').on('click',function(){$('.collapse').collapse('hide');})
+
 
 
 $(function () {
@@ -26,6 +56,9 @@ function isNumber(evt) {
     }
     return true;
 }
+
+
+
 
 
 

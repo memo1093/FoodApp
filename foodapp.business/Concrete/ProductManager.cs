@@ -13,7 +13,7 @@ namespace foodapp.business.Concrete
             _productRepository = productRepository;
         }
 
-        
+                
 
         public bool Create(Product entity)
         {
@@ -88,7 +88,7 @@ namespace foodapp.business.Concrete
         public bool Validation(Product entity)
         {
             
-            if (entity.CategoryId==0 || entity.CategoryId==null)
+            if (entity.CategoryId==0)
             {
                 ErrorMessage +="Ürün için bir kategori seçmelisiniz. \n";
                 return false;

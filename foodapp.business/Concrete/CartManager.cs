@@ -29,7 +29,7 @@ namespace foodapp.business.Concrete
                     cart.CartItems.Add(new CartItem(){
                         ProductId=productId,
                         Quantity=quantity,
-                        CartId=cart.Id
+                        CartId=cart.Id,
                     });
                 }
                 else
@@ -38,6 +38,11 @@ namespace foodapp.business.Concrete
                 }
                 _cartRepository.Update(cart);
             }
+        }
+
+        public void ClearCart(int cartId)
+        {
+            _cartRepository.ClearCart(cartId);
         }
 
         public void DeleteFromCart(int productId,string userId)

@@ -9,7 +9,7 @@ namespace foodapp.data.Concrete.EfCore
         where TEntity : class
         where TContext : DbContext, new()
     {
-        public void Create(TEntity entity)
+        public virtual void Create(TEntity entity)
         {
             using (var context = new TContext())
             {
@@ -18,7 +18,7 @@ namespace foodapp.data.Concrete.EfCore
             }
         }
 
-        public void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             using (var context = new TContext())
             {
@@ -52,6 +52,7 @@ namespace foodapp.data.Concrete.EfCore
             }
         }
 
+        
         
     }
 }

@@ -1,0 +1,70 @@
+@{
+    Layout="_Layout";
+}
+@model List<OrderListModel>
+@await Html.PartialAsync("_navbar2");
+
+<div class="container my-4">
+    <h4>Siparişlerim</h4>
+    @if (Model.Count()==0)
+    {
+        <div class="alert alert-warning">Siparişiniz Bulunmamaktadır.</div>
+    }
+    @foreach (var order in Model)
+    {
+        <table class="table table-bordered table-sm mb-3">
+            <thead>
+                <tr>
+                    <td colspan="2"> <span class="font-weight-bold">Sipariş Numarası :</span> #@order.OrderNumber</td>
+                    <th>Fiyat</th>
+                    <th>Miktar</th>
+                    <th colspan="0">Sipariş Durumu</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var orderItem in order.OrderItems)
+                {
+                    <tr>
+                        <td><img src="~/img/Products/@orderItem.ImageUrl" width="50" alt="@orderItem.ProductName"></td>
+                        <td>@orderItem.ProductName</td>
+                        <td>@orderItem.Price</td>
+                        <td>@orderItem.Quantity</td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">Alıcının Adı Soyadı</td>
+                    <td>@order.FirstName @order.LastName</td>
+                    <td rowspan="5">Toplam: @order.OrderTotal() TL</td>
+                    <td rowspan="5">
+                        @order.OrderStateName
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">Adres</td>
+                    <td>@order.Address</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Email</td>
+                    <td>@order.Email</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Telefon</td>
+                    <td>@order.Phone</td>
+                </tr>
+                <tr class="font-weight-bold">
+                    <td colspan="2">Sipariş Tarihi</td>
+                    <td>@order.OrderDate.ToString("MM/dd/yyyy")</td>
+                </tr>
+            </tfoot>
+        </table>
+    }
+    @section Scripts{
+        <script src="~/js/data.js"></script>
+    }
+
+   
+</div>

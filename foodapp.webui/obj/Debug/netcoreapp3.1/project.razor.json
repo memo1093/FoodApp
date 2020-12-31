@@ -14392,6 +14392,11 @@
   "RootNamespace": "foodapp.webui",
   "Documents": [
     {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Cart\\Checkout.cshtml",
+      "TargetPath": "Views\\Cart\\Checkout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Admin\\ProductList.cshtml",
       "TargetPath": "Views\\Admin\\ProductList.cshtml",
       "FileKind": "mvc"
@@ -14467,6 +14472,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Admin\\GetAllOrders.cshtml",
+      "TargetPath": "Views\\Admin\\GetAllOrders.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Admin\\CategoryList.cshtml",
       "TargetPath": "Views\\Admin\\CategoryList.cshtml",
       "FileKind": "mvc"
@@ -14474,6 +14484,11 @@
     {
       "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Cart\\Success.cshtml",
+      "TargetPath": "Views\\Cart\\Success.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14492,8 +14507,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Order\\Orders.cshtml",
+      "TargetPath": "Views\\Order\\Orders.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Shared\\_noproducts.cshtml",
       "TargetPath": "Views\\Shared\\_noproducts.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\pc\\Desktop\\Website\\FoodApp\\FoodApp\\foodapp.webui\\Views\\Shared\\_warning2.cshtml",
+      "TargetPath": "Views\\Shared\\_warning2.cshtml",
       "FileKind": "mvc"
     },
     {

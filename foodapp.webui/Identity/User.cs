@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Identity;
 
 namespace foodapp.webui.Identity
@@ -6,5 +7,7 @@ namespace foodapp.webui.Identity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        
+        
     }
 }

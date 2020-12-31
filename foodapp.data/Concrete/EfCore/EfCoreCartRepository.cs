@@ -7,6 +7,20 @@ namespace foodapp.data.Concrete.EfCore
 {
     public class EfCoreCartRepository : EfCoreGenericRepository<Cart, FoodContext>, ICartRepository
     {
+        public void ClearCart(int cartId)
+        {
+            using (var context = new FoodContext())
+            {
+                var items = context.CartItems.Where(i=>i.CartId==cartId).ToList();
+                foreach (var item in items)
+                {
+                    context.CartItems.Remove(item);
+                }
+                
+                context.SaveChanges();
+            }
+        }
+
         public void DeleteFromCart(int cartId, int productId)
         {
             using (var context = new FoodContext())

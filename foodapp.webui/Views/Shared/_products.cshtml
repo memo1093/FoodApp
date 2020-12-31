@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-horizontal">
                 <div class="img-square-wrapper">
-                    <img src="~/img/Products/@Model.ImageUrl" style="width: 200px; height:150px" class="img-fluid"
+                    <img src="~/img/Products/@Model.ImageUrl" style="width: 200px; height:150px" class="img-fluid changingImage" 
                         alt="" srcset="">
                 </div>
                 <div class="card-body">
@@ -29,6 +29,10 @@
                         </div>
                         <input type="hidden" name="productId" id="productId-@Model.ProductId"
                             value="@Model.ProductId">
+
+                            <input type="hidden" name="CategoryId" id="productId-@Model.CategoryId"
+                            value="@Model.CategoryId">
+                            
                             <script>
                                 $(document).ready(function () {
                                         
@@ -53,13 +57,12 @@
 
 
                                         
-                                    
+                               
                                 $("#addToCart-@Model.ProductId").click(function(e){
                                     const productId=$("#productId-@Model.ProductId").val();
                                     const quantity=$("#quantity-@Model.ProductId").val();
                                     var data = {"ProductId" : productId, "Quantity" : quantity};
                                     
-                                        console.log('data :>> ', data);
                                     $.ajax({
                                       async:true,
                                       type: "POST",
