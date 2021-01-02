@@ -1,0 +1,20 @@
+@{
+    Layout="_Layout";
+}
+@await Html.PartialAsync("_navbar2");
+<div class="container">
+    <partial name="_messages" model="@(TempData.Get<AlertMessage>("message"))" />
+
+    <h4>15 saniye içerisinde anasayfaya yönlendirileceksiniz. Eğer hemen geçmek isterseniz <a href="/">linke</a> tıklayabilirsiniz.</h4>  
+</div>
+
+  
+
+
+@section Scripts{
+    <script>
+        window.setTimeout(function(){
+        window.location.href='/';
+        }, 15000);
+    </script>
+}

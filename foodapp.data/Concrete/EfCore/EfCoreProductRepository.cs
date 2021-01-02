@@ -58,6 +58,34 @@ namespace foodapp.data.Concrete.EfCore
             }
         }
 
+
+        public override void Create(Product entity)
+        {
+            base.Create(entity);
+            using (var context = new FoodContext())
+            {
+                var product = context.Products
+                                        .Where(i=>i.ProductId==entity.ProductId)
+                                        .Include(i=>i.ProductCategories)
+                                        .FirstOrDefault();
+                
+                    product.ProductCategories.Add(new ProductCategory(){
+                        ProductId=entity.ProductId,
+                        CategoryId=(int)entity.CategoryId
+                    });
+                    
+
+                
+                context.SaveChanges();
+            }
+        }
+
+
+
+
+
+
+
         
     }
 }

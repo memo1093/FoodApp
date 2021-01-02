@@ -36,5 +36,18 @@ namespace foodapp.data.Concrete.EfCore
                 return categories.ToList();
             }
         }
+        public override void Delete(Category entity)
+        {
+            using (var context = new FoodContext())
+            {
+                var category = context.Categories.Single(i=>i.CategoryId==entity.CategoryId);
+                var products = context.Products.Where(i=>EF.Property<int>(i,"CategoryId")==entity.CategoryId).ToList();
+                context.RemoveRange(products);
+                context.Remove(category);
+                context.SaveChanges();
+            }
+        }
+
+        
     }
 }

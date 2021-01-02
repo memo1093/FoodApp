@@ -3,9 +3,14 @@
     Layout="_Layout";
     var categories = Model.Categories;
     var products = Model.Products;
+   
 }
 
 @await Html.PartialAsync("_navbar")
+<div class="mt-5">
+<partial name="_messages" model="@(TempData.Get<AlertMessage>("message"))" />
+</div>
+
 @await Html.PartialAsync("_header")
 
 <main>
@@ -17,7 +22,7 @@
         <div class="collapse multi-collapse bg-light my-4"
                         id="collapsable-@category.CategoryId">
 
-                        <form action="">
+                        <form method="POST">
                             
                             @foreach (var product in products)
                             {
@@ -28,18 +33,12 @@
                                 @if (product.CategoryId==category.CategoryId && product.IsApproved)
                                 {
                                      @await Html.PartialAsync("_products",product);
+                                     
                                 }
                                 
                                 
                                                                
                             }
-
-                           <div class="row justify-content-center">
-                               <div class="col-auto">
-                                   <button class="btn btn-outline-info float-right my-2"
-                             asp-controller="shop" asp-action="addtocart">Sepete Ekle</button>
-                               </div>
-                           </div>
                             
                         </form>
                     </div>
@@ -66,5 +65,10 @@
 </div>
 
 </main>
+
+
+@section Scripts{
+    <script src="~/js/data.js"></script>
+}
 
 

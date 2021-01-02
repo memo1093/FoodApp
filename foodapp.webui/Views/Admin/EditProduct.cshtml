@@ -26,9 +26,8 @@
             </div>
             <label asp-for="Price" class="col-sm-2 col-form-label mb-2"></label>
             <div class="col-sm-10">
-                <input asp-for="Price" type="text" class="form-control"
-                    placeholder="3.50">
-                    <span asp-validation-for="Price" class="text-danger"></span>
+                <input name="Price" id="Price" type="text" class="form-control"
+                    placeholder="3,5 veya 3,75">
             </div>
             <label asp-for="ImageUrl"
                 class="col-sm-2 col-form-label mb-2"></label>
@@ -68,4 +67,5 @@
 @section Scripts{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js" integrity="sha512-EanukVTZc4W9tUCLnDl069Izidg49PcNRKO1upLzKt9ajq66i+bXOtlzXcIbRhb6vVEGF6BCc8wQi5T1ztCpTQ==" crossorigin="anonymous"></script>
+<script src="~/js/data.js"></script>
 }

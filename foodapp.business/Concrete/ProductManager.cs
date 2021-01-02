@@ -13,7 +13,7 @@ namespace foodapp.business.Concrete
             _productRepository = productRepository;
         }
 
-        
+                
 
         public bool Create(Product entity)
         {
@@ -88,7 +88,7 @@ namespace foodapp.business.Concrete
         public bool Validation(Product entity)
         {
             
-            if (entity.CategoryId==0 || entity.CategoryId==null)
+            if (entity.CategoryId==0)
             {
                 ErrorMessage +="Ürün için bir kategori seçmelisiniz. \n";
                 return false;
@@ -114,7 +114,7 @@ namespace foodapp.business.Concrete
                 ErrorMessage +="Ürün fiyatı negatif olamaz. \n";
                 return false;
             }
-            if (entity.Price <0.25)
+            if (entity.Price <0.25m)
             {
                 ErrorMessage +="Ürün fiyatı minimum 0.25 olabilir.  \n";
                 return false;

@@ -68,19 +68,23 @@ namespace foodapp.business.Concrete
         public string ErrorMessage { get; set ; }
         public bool Validation(Category entity)
         {
-            bool isValid = true;
             if (string.IsNullOrEmpty(entity.Name))
             {
-                ErrorMessage += "Kategori adı mutlaka girilmelidir.";
+                ErrorMessage += "Kategori adı mutlaka girilmelidir. \n";
                 return false;
             }
             if (entity.Name.Length<4 && entity.Name.Length>20)
             {
-                ErrorMessage += "Kategori adı 4-20 karakter arası olmalıdır";
+                ErrorMessage += "Kategori adı 4-20 karakter arası olmalıdır \n";
+                return false;
+            }
+            if (entity.ImageUrl==null)
+            {
+                ErrorMessage+="Kategori resmi mutlaka girilmelidir. \n";
                 return false;
             }
            
-            return isValid;
+            return true;
         }
         
 

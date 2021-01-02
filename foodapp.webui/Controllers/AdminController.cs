@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,32 +16,36 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace foodapp.webui.Controllers
 {
-    
-    
+
+
     public class AdminController : Controller
     {
         private IProductService _productService;
         private ICategoryService _categoryService;
+        private IOrderService _orderService;
         private RoleManager<IdentityRole> _roleManager;
         private UserManager<User> _userManager;
+
         public AdminController(IProductService productService, ICategoryService categoryService,
-                                RoleManager<IdentityRole> roleManager,UserManager<User> userManager)
+                                RoleManager<IdentityRole> roleManager, UserManager<User> userManager, IOrderService orderService)
         {
             this._productService = productService;
             this._categoryService = categoryService;
             this._roleManager = roleManager;
             this._userManager = userManager;
+            this._orderService = orderService;
         }
-        [Authorize(Roles="master")]
+        [Authorize(Roles = "master")]
         public IActionResult RolesList()
         {
             return View(_roleManager.Roles);
         }
-        [Authorize(Roles="master")]
+        [Authorize(Roles = "master")]
         public IActionResult CreateRole()
         {
             return View();
         }
+        [Authorize(Roles = "master")]
         [HttpPost]
         public async Task<IActionResult> CreateRole(RoleModel model)
         {
@@ -51,7 +56,7 @@ namespace foodapp.webui.Controllers
                 {
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = $"{model.Name} rolü başarıyla eklendi.",
+                        Title = $"",
                         Message = $"{model.Name} rolü başarıyla eklendi.",
                         AlertType = "alert-success"
                     });
@@ -61,150 +66,153 @@ namespace foodapp.webui.Controllers
                 {
                     foreach (var error in result.Errors)
                     {
-                        ModelState.AddModelError("",$"Hata : {error}");
+                        ModelState.AddModelError("", $"Hata : {error}");
                     }
                 }
-                 
+
                 return View(model);
             }
             TempData.Put("message", new AlertMessage
-                    {
-                        Title = $"{model.Name} rolü eklenemedi.",
-                        Message = $"{model.Name} rolü eklenemedi.",
-                        AlertType = "alert-secondary"
-                    });
+            {
+                Title = $"",
+                Message = $"{model.Name} rolü eklenemedi.",
+                AlertType = "alert-secondary"
+            });
             return View(model);
-            
+
         }
-        [Authorize(Roles="master")]
+        [Authorize(Roles = "master")]
         public async Task<IActionResult> EditRole(string id)
         {
             var role = await _roleManager.FindByIdAsync(id);
             var members = new List<User>();
             var nonMembers = new List<User>();
-            var userList =  _userManager.Users.ToList();
-            
+            var userList = _userManager.Users.ToList();
+
             foreach (var user in userList)
             {
 
-                var list = await _userManager.IsInRoleAsync(user,role.Name)
-                                                            ?members:nonMembers;
+                var list = await _userManager.IsInRoleAsync(user, role.Name)
+                                                            ? members : nonMembers;
 
                 list.Add(user);
-                
+
             }
             var model = new RoleDetails()
             {
-                Role=role,
-                Members=members,
-                NonMembers=nonMembers
+                Role = role,
+                Members = members,
+                NonMembers = nonMembers
             };
 
             return View(model);
         }
+        [Authorize(Roles = "master")]
         [HttpPost]
         public async Task<IActionResult> EditRole(RoleEditModel model)
         {
             if (ModelState.IsValid)
             {
-                foreach (var userId in model.IdsToAdd ?? new string[]{})
+                foreach (var userId in model.IdsToAdd ?? new string[] { })
                 {
                     var user = await _userManager.FindByIdAsync(userId);
-                    if (user!=null)
+                    if (user != null)
                     {
-                        var result = await _userManager.AddToRoleAsync(user,model.RoleName);
+                        var result = await _userManager.AddToRoleAsync(user, model.RoleName);
                         if (!result.Succeeded)
                         {
                             foreach (var error in result.Errors)
                             {
-                                ModelState.AddModelError("",error.Description);
+                                ModelState.AddModelError("", error.Description);
                             }
                             return View(model);
                         }
-                        
+
                     }
                 }
-                foreach (var userId in model.IdsToDelete ?? new string[]{})
+                foreach (var userId in model.IdsToDelete ?? new string[] { })
                 {
                     var user = await _userManager.FindByIdAsync(userId);
-                    if (user!=null)
+                    if (user != null)
                     {
-                        var result = await _userManager.RemoveFromRoleAsync(user,model.RoleName);
+                        var result = await _userManager.RemoveFromRoleAsync(user, model.RoleName);
                         if (!result.Succeeded)
                         {
                             foreach (var error in result.Errors)
                             {
-                                ModelState.AddModelError("",error.Description);
+                                ModelState.AddModelError("", error.Description);
                             }
                             return View(model);
                         }
-                        
+
                     }
                 }
 
-                
+
             }
             return RedirectToAction("RolesList");
         }
-
+        [Authorize(Roles = "admin")]
         public IActionResult UserList()
         {
             return View(_userManager.Users);
         }
-       
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> EditUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
-            if (user!=null)
+            if (user != null)
             {
                 var selectedRoles = await _userManager.GetRolesAsync(user);
 
-                return View(new UserDetailModel(){
-                    UserId=user.Id,
-                    UserName=user.UserName,
-                    FirstName=user.FirstName,
+                return View(new UserDetailModel()
+                {
+                    UserId = user.Id,
+                    UserName = user.UserName,
+                    FirstName = user.FirstName,
                     LastName = user.LastName,
-                    Email=user.Email,
+                    Email = user.Email,
                     EmailConfirmed = user.EmailConfirmed,
-                    
+
                 });
             }
             return Redirect("~/admin/user/list");
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> EditUser(UserDetailModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByIdAsync(model.UserId);
-                if (user!=null)
+                if (user != null)
                 {
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
                     user.UserName = model.UserName;
                     user.EmailConfirmed = model.EmailConfirmed;
-                    user.Email=model.Email;
+                    user.Email = model.Email;
 
-                    var result= await _userManager.UpdateAsync(user);
+                    var result = await _userManager.UpdateAsync(user);
                     if (result.Succeeded)
                     {
-                        TempData.Put("message", new AlertMessage{
-                            Title ="Kullanıcı Güncelleme",
-                            Message= "Kullanıcı Güncelleme işlemi başarılı",
+                        TempData.Put("message", new AlertMessage
+                        {
+                            Title = "",
+                            Message = "Kullanıcı Güncelleme işlemi başarılı",
                             AlertType = "alert-success"
-                        });   
+                        });
                         return RedirectToAction("UserList");
                     }
                 }
-                
+
             }
             return View(model);
-            
+
         }
 
 
-
+        [Authorize(Roles = "admin")]
         public IActionResult ProductList()
         {
             return View(new ProductCategoryListViewModel()
@@ -214,10 +222,10 @@ namespace foodapp.webui.Controllers
             });
         }
 
-        
 
 
-        [Authorize(Roles="admin")]
+
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult CreateProduct()
         {
@@ -225,6 +233,7 @@ namespace foodapp.webui.Controllers
             return View();
 
         }
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> CreateProduct(ProductModel model, IFormFile file)
         {
@@ -233,7 +242,7 @@ namespace foodapp.webui.Controllers
                 if (file != null)
                 {
                     var extension = Path.GetExtension(file.FileName);
-                    var randomName = string.Format($"{DateTime.Now.Ticks}{extension}");
+                    var randomName = string.Format($"{model.Name}-{DateTime.Now.Ticks}{extension}");
 
                     model.ImageUrl = randomName;
 
@@ -259,7 +268,7 @@ namespace foodapp.webui.Controllers
                 {
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = $"{entity.Name} adlı ürün başarıyla eklendi",
+                        Title = $"Ürün Ekleme",
                         Message = $"{entity.Name} adlı ürün başarıyla eklendi",
                         AlertType = "alert-success"
                     });
@@ -277,7 +286,7 @@ namespace foodapp.webui.Controllers
 
 
         }
-        [Authorize(Roles="admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult EditProduct(int? id)
         {
@@ -305,7 +314,7 @@ namespace foodapp.webui.Controllers
             return View(model);
 
         }
-        [Authorize(Roles="admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> EditProduct(ProductModel model, int[] categoryIds, IFormFile file)
         {
@@ -324,7 +333,7 @@ namespace foodapp.webui.Controllers
                 {
 
                     var extension = Path.GetExtension(file.FileName);
-                    var randomName = string.Format($"{DateTime.Now.Ticks}{extension}");
+                    var randomName = string.Format($"{model.Name}-{DateTime.Now.Ticks}{extension}");
                     entity.ImageUrl = randomName;
                     var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img\\Products", randomName);
 
@@ -337,7 +346,7 @@ namespace foodapp.webui.Controllers
                 {
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = "Ürün kategorisi seçmelisiniz.",
+                        Title = "",
                         Message = "Ürün kategorisi seçmelisiniz.",
 
                     });
@@ -350,7 +359,7 @@ namespace foodapp.webui.Controllers
                 {
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = $"{entity.Name} isimli ürün başarıyla güncellendi.",
+                        Title = $"Ürün Güncelleme",
                         Message = $"{entity.Name} isimli ürün başarıyla güncellendi.",
                         AlertType = "alert-success"
 
@@ -371,7 +380,7 @@ namespace foodapp.webui.Controllers
         }
 
 
-        [Authorize(Roles="admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult DeleteProduct(int productId)
         {
@@ -380,7 +389,7 @@ namespace foodapp.webui.Controllers
             {
                 TempData.Put("message", new AlertMessage
                 {
-                    Title = $"{entity.Name} adında ürün yok.",
+                    Title = $"",
                     Message = $"{entity.Name} adında ürün yok.",
 
                 });
@@ -391,7 +400,7 @@ namespace foodapp.webui.Controllers
                 {
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = $"{entity.Name} isimli ürün silindi.",
+                        Title = $"Ürün Silme",
                         Message = $"{entity.Name} isimli ürün silindi."
 
                     });
@@ -410,7 +419,7 @@ namespace foodapp.webui.Controllers
 
             return RedirectToAction("ProductList");
         }
-        [Authorize(Roles="admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Approve(int productId)
         {
@@ -426,7 +435,7 @@ namespace foodapp.webui.Controllers
                     _productService.Update(entity);
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = $"{entity.Name} isimli ürünün onayı kaldırıldı.",
+                        Title = $"Onay Durumu",
                         Message = $"{entity.Name} isimli ürünün onayı kaldırıldı.",
                         AlertType = "alert-warning"
                     });
@@ -438,17 +447,25 @@ namespace foodapp.webui.Controllers
                     _productService.Update(entity);
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = $"{entity.Name} isimli ürün başarıyla onaylandı.",
+                        Title = $"Onay Durumu",
                         Message = $"{entity.Name} isimli ürün başarıyla onaylandı.",
                         AlertType = "alert-warning"
                     });
                 }
-
+                return RedirectToAction("ProductList");
 
             }
+            TempData.Put("message", new AlertMessage
+            {
+                Title = $"",
+                Message = $"{entity.Name} isimli ürün onayı başarısız oldu! Ürün kayıtlı olmayabilir ya da ait olduğu bir kategorisi yok.",
+                AlertType = "alert-danger"
+            });
 
             return RedirectToAction("ProductList");
+
         }
+        [Authorize(Roles = "admin")]
         public IActionResult CategoryList()
         {
 
@@ -460,19 +477,37 @@ namespace foodapp.webui.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles="admin")]
+        [Authorize(Roles = "admin")]
 
         public IActionResult CreateCategory()
         {
 
             return View();
         }
+        [Authorize(Roles = "admin")]
 
         [HttpPost]
-        public IActionResult CreateCategory(CategoryModel model)
+        public async Task<IActionResult> CreateCategory(CategoryModel model, IFormFile file)
         {
+
             if (ModelState.IsValid)
             {
+
+                if (file != null)
+                {
+                    var extension = Path.GetExtension(file.FileName);
+                    var name = string.Format($"{model.Name}-{DateTime.Now.Ticks}{extension}");
+
+
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img\\Categories", name);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                    model.ImageUrl = name;
+
+                }
+
                 var entity = new Category()
                 {
                     Name = model.Name,
@@ -480,24 +515,31 @@ namespace foodapp.webui.Controllers
                 };
                 if (_categoryService.Create(entity))
                 {
+                    TempData.Put("message", new AlertMessage
+                    {
+                        Title = $"Kategori Tipi",
+                        Message = $"{entity.Name} Kategori tipi başarıyla eklendi",
+                        AlertType = "alert-success"
+                    });
+
+
+                    return RedirectToAction("CategoryList");
 
                 }
 
-                TempData.Put("message", new AlertMessage
-                {
-                    Title = $"{entity.Name} Kategori tipi başarıyla eklendi",
-                    Message = $"{entity.Name} Kategori tipi başarıyla eklendi",
-                    AlertType = "alert-success"
-                });
 
-
-                return RedirectToAction("CategoryList");
             }
+            TempData.Put("message", new AlertMessage
+            {
+                Title = "",
+                Message = _categoryService.ErrorMessage,
+
+            });
+
             return View(model);
         }
 
-        [Authorize(Roles="admin")]
-
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult EditCategory(int? id)
         {
@@ -505,6 +547,7 @@ namespace foodapp.webui.Controllers
             {
                 return NotFound();
             }
+
             var entity = _categoryService.GetByIdWithProducts((int)id);
             if (entity == null)
             {
@@ -519,8 +562,9 @@ namespace foodapp.webui.Controllers
             };
             return View(model);
         }
+        [Authorize(Roles = "admin")]
         [HttpPost]
-        public IActionResult EditCategory(CategoryModel model)
+        public async Task<IActionResult> EditCategory(CategoryModel model, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -528,6 +572,20 @@ namespace foodapp.webui.Controllers
                 if (entity == null)
                 {
                     return NotFound(entity.Name);
+                }
+                if (file != null)
+                {
+                    var extension = Path.GetExtension(file.FileName);
+                    var name = string.Format($"{model.Name}-{DateTime.Now.Ticks}{extension}");
+
+
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img\\Categories", name);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                    model.ImageUrl = name;
+
                 }
 
                 entity.Name = model.Name;
@@ -538,7 +596,7 @@ namespace foodapp.webui.Controllers
 
                 TempData.Put("message", new AlertMessage
                 {
-                    Title = $"{entity.Name} Kategori tipi başarıyla güncellendi",
+                    Title = $"Kategori Güncelleme",
                     Message = $"{entity.Name} Kategori tipi başarıyla güncellendi",
                     AlertType = "alert-success"
                 });
@@ -550,7 +608,7 @@ namespace foodapp.webui.Controllers
 
         }
 
-        [Authorize(Roles="admin")]
+        [Authorize(Roles = "admin")]
 
         [HttpPost]
         public IActionResult DeleteCategory(int categoryId)
@@ -562,18 +620,155 @@ namespace foodapp.webui.Controllers
                 return NotFound(category);
             }
 
+            if (category.ImageUrl != null)
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", "Categories", category.ImageUrl);
+                FileInfo file = new FileInfo(path);
+                file.Delete();
+            }
+
             _categoryService.Delete(category);
             TempData.Put("message", new AlertMessage
             {
-                Title = $"{category.Name} Kategori tipi ve içerdiği ürünler silindi",
+                Title = $"Kategori Silme",
                 Message = $"{category.Name} Kategori tipi ve içerdiği ürünler silindi",
 
             });
             return RedirectToAction("CategoryList");
         }
 
+
+        [Authorize(Roles = "admin")]
+        public IActionResult GetAllOrders()
+        {
+            var orders = _orderService.GetAllOrders();
+            var orderListModel = new List<OrderListModel>();
+            OrderListModel orderModel;
+            foreach (var order in orders)
+            {
+                orderModel = new OrderListModel();
+
+                orderModel.OrderId = order.OrderId;
+                orderModel.OrderNumber = order.OrderNumber;
+                orderModel.OrderState = order.OrderState;
+                orderModel.OrderDate = order.OrderDate;
+                orderModel.FirstName = order.FirstName;
+                orderModel.LastName = order.LastName;
+                orderModel.Address = order.Address;
+                orderModel.Phone = order.Phone;
+                orderModel.Email = order.Email;
+                orderModel.PaymentType = order.PaymentType;
+
+
+
+
+                orderModel.OrderItems = order.OrderItems.Select(i => new OrderItemModel()
+                {
+                    OrderItemId = i.OrderId,
+                    ProductName = i.Product.Name,
+                    Price = i.Price,
+                    Quantity = i.Quantity,
+                    ImageUrl = i.Product.ImageUrl
+
+
+                }).ToList();
+
+
+
+                ViewBag.EnumOrderValues = Enum.GetValues(typeof(EnumOrderState));
+
+
+
+                orderListModel.Add(orderModel);
+            }
+            return View("GetAllOrders", orderListModel);
+        }
+
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public IActionResult ChangeOrderState(string orderState, int orderId)
+        {
+
+
+
+            var orders = _orderService.GetAllOrders();
+            var orderListModel = new List<OrderListModel>();
+            OrderListModel orderModel;
+            foreach (var order in orders)
+            {
+                orderModel = new OrderListModel();
+                if (order.OrderId == orderId)
+                {
+
+                    Enum.Parse(typeof(EnumOrderState), orderState);
+                    switch (orderState)
+                    {
+                        case "waiting":
+                            order.OrderState = EnumOrderState.waiting;
+                            break;
+                        case "unpaid":
+                            order.OrderState = EnumOrderState.unpaid;
+                            break;
+                        case "onway":
+                            order.OrderState = EnumOrderState.onway;
+                            break;
+                        case "completed":
+                            order.OrderState = EnumOrderState.completed;
+                            break;
+
+                    
+                    }
+                    
+
+                }
+                orderModel.OrderId = order.OrderId;
+                orderModel.OrderNumber = order.OrderNumber;
+
+                orderModel.OrderState = order.OrderState;
+                orderModel.OrderDate = order.OrderDate;
+                orderModel.FirstName = order.FirstName;
+                orderModel.LastName = order.LastName;
+                orderModel.Address = order.Address;
+                orderModel.Phone = order.Phone;
+                orderModel.Email = order.Email;
+                orderModel.PaymentType = order.PaymentType;
+
+
+                orderModel.OrderItems = order.OrderItems.Select(i => new OrderItemModel()
+                {
+                    OrderItemId = i.OrderId,
+                    ProductName = i.Product.Name,
+                    Price = i.Price,
+                    Quantity = i.Quantity,
+                    ImageUrl = i.Product.ImageUrl
+
+                }).ToList();
+                _orderService.Update(order);
+
+
+                ViewBag.EnumOrderValues = Enum.GetNames(typeof(EnumOrderState));
+
+
+
+                orderListModel.Add(orderModel);
+                
+            }
+            return RedirectToAction("GetAllOrders", orderListModel);
+
+        }
+        public EnumOrderState GetOrderState(string orderState)
+        {
+            EnumOrderState parsedOrderState;
+            if (Enum.TryParse<EnumOrderState>(orderState, true, out parsedOrderState))
+            {
+                return parsedOrderState;
+            }
+            return parsedOrderState;
+        }
         public IActionResult AccessDenied()
         {
+
             return View();
         }
 

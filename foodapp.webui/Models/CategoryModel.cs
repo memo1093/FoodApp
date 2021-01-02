@@ -13,8 +13,6 @@ namespace foodapp.webui.Models
         [StringLength(20,MinimumLength=4,ErrorMessage="Kategori Adı 4 ile 20 karakter arasında olmalıdır.")]
         public string Name { get; set; }
         [Display(Name="Kategori Resmi",Prompt="Kategori Resmi")]
-        [Required(ErrorMessage="Kategori Resmi girilmelidir.")]
-        [StringLength(20,MinimumLength=5,ErrorMessage="Kategori Resmi 5 ile 20 karakter arasında olmalıdır.")]
         public string ImageUrl { get; set; }
         [Display(Name="Kategoriye ait ürünler")]
         public List<Product> ProductsInThisCategory{get; set;}

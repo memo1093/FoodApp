@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using foodapp.business.Abstract;
 using foodapp.webui.EmailService;
 using foodapp.webui.Extensions;
 using foodapp.webui.Identity;
@@ -17,16 +18,28 @@ namespace foodapp.webui.Controllers
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
         private IEmailSender _emailSender;
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IEmailSender emailSender)
+        private ICartService _icartService;
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IEmailSender emailSender,ICartService icartService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _icartService=icartService;
         }
 
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                TempData.Put("message", new AlertMessage
+                    {
+                        Title = "",
+                        Message = "Zaten giriş yaptınız.",
+                        AlertType = "alert-warning"
+                    });
+                return RedirectToAction("Index","Home");
+            }
             return View(new LoginModel() { ReturnUrl = returnUrl });
         }
 
@@ -64,6 +77,18 @@ namespace foodapp.webui.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                TempData.Put("message", new AlertMessage
+                    {
+                        Title = "",
+                        Message = $"Zaten aktif bir hesabınız mevcut.",
+                        AlertType = "alert-warning"
+                    });
+                    return RedirectToAction("Index","Home");
+                
+            }
+            
             return View();
         }
 
@@ -116,6 +141,17 @@ namespace foodapp.webui.Controllers
         [HttpGet]
         public IActionResult ForgotPassword()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                TempData.Put("message", new AlertMessage
+                    {
+                        Title = "",
+                        Message = "Zaten giriş yaptınız.",
+                        AlertType = "alert-warning"
+                    });
+                    return RedirectToAction("Index","Home");
+                
+            }
             return View();
         } 
         [HttpPost]
@@ -151,11 +187,22 @@ namespace foodapp.webui.Controllers
         [HttpGet]
         public IActionResult ResetPassword(string userId, string token)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                TempData.Put("message", new AlertMessage
+                    {
+                        Title = "",
+                        Message = "Zaten giriş yaptınız.",
+                        AlertType = "alert-warning"
+                    });
+                    return RedirectToAction("Index","Home");
+                
+            }
             if (userId == null || token == null)
             {
                 TempData.Put("message", new AlertMessage
                     {
-                        Title = "Yanlış link",
+                        Title = "",
                         Message = $"Yanlış link bilgisi. Lütfen linkin bizim tarafımızca gönderildiğinden emin olun",
                         AlertType = "alert-warning"
                     });
@@ -197,6 +244,17 @@ namespace foodapp.webui.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                TempData.Put("message", new AlertMessage
+                    {
+                        Title = "",
+                        Message = $"Mevcut hesap bulunmamaktadır.",
+                        AlertType = "alert-warning"
+                    });
+                    return RedirectToAction("Index","Home");
+                
+            }
             await _signInManager.SignOutAsync();
             return Redirect("~/");
         }
@@ -218,6 +276,7 @@ namespace foodapp.webui.Controllers
                 var result = await _userManager.ConfirmEmailAsync(user, _token);
                 if (result.Succeeded)
                 {
+                    _icartService.InitializeCart(user.Id);
                     TempData.Put("message", new AlertMessage
                     {
                         Title = "Hesap Onaylandı",
@@ -229,6 +288,10 @@ namespace foodapp.webui.Controllers
             }
             
             
+            return View();
+        }
+        public IActionResult AccessDenied()
+        {
             return View();
         }
 

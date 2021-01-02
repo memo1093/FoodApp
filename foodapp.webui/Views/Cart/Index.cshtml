@@ -1,0 +1,112 @@
+@model CartModel
+
+@{
+    Layout = "_Layout";
+    var cargoPrice= Model.CargoPrice;
+    var totalPrice = Model.CartTotal()+cargoPrice;
+}
+@await Html.PartialAsync("_navbar2")
+
+<div class="container my-4">
+    <h4>Sepetim</h4>
+    <div class="row">
+        @if (Model.CartItems.Count==0)
+        {
+            <div class="col-md-9">
+                <partial name="_messages" model="@(TempData.Get<AlertMessage>("message"))" />
+                <div class="alert alert-danger">Sepetiniz Boş. Ürünlere göz atmak için <a href="/#products">linke</a> tıklayın.</div>
+            </div>
+        }
+        @if (Model.CartItems.Count>0)
+        {
+            <div class="col-md-8">
+            <table class="table table-hover table-responsive table-borderless">
+                <thead>
+                    <th></th>
+                    <th >Ürün Adı</th>
+                    <th >Ürün Fiyatı</th>
+                    <th >Miktarı</th>
+                    <th >Toplam Fiyat</th>
+                </thead>
+                <tbody>
+                    @foreach (var item in @Model.CartItems)
+                    {
+                        <tr class="productInCart">
+                            <td><img src="~/img/Products/@item.ImageUrl"
+                                    style="max-width: 100px;" alt=""></td>
+                            <td>@item.Name</td>
+                            <td>@item.Price</td>
+                            <td>@item.Quantity</td>
+                            <td>@(item.Quantity*item.Price) TL</td>
+                            <td>
+                                <form asp-action="DeleteFromCart" asp-controller="Cart" method="post">
+                                    <td>
+                                        <input type="hidden" name="productId" value="@item.ProductId">
+                                        <button class="btn btn-danger btn-sm">
+                                            <i class="fas fa-times text-light"></i>
+                                        </button>
+                                    </td>
+                                </form>
+                                
+                        </tr>
+                    }
+                    
+                </tbody>
+            </table>
+            <table>
+                   <tbody>
+                          <tr>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td>
+                                     <form asp-action="DeleteAllFromCart" asp-controller="Cart"  method="POST">
+                                         @foreach (var item in @Model.CartItems)
+                                         {
+                                             <input type="hidden" name="productIds" value="@item.ProductId">
+                                         }
+                                          <button type="submit" class="btn btn-danger">Hepsini Kaldır</button>
+                                          </form>
+                                 </td>
+                          </tr>
+                   </tbody>
+            </table>
+            
+        </div>
+        <div class="col-md-4">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <th class="h4">Sepet Tutarı</th>
+                        <td class="h5">@Model.CartTotal() TL</td>
+                        
+                       
+                    </tr>
+                    <tr>
+                        <th class="h4">Kargo Tutarı</th>
+                        <td class="h5">@cargoPrice TL</td>
+                        
+                    </tr>
+                    
+                     <tr>
+                        <td class="h4 text-info">Toplam Tutar</td>
+                        <td class="h5 text-info">@totalPrice TL</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <th></th>
+                         <td><a asp-controller="cart" asp-action="checkout" class="btn btn-success">Alışverişi Tamamla</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        }
+        
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/data.js"></script>
+}
