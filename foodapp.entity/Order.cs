@@ -34,9 +34,9 @@ namespace foodapp.entity
 
     public enum EnumOrderState
     {
-        [Description("Onay Bekliyor")]
+        [Description("Onay Bekleniyor")]
         waiting=0,
-        [Description("Ödeme gerçekleşmedi")]
+        [Description("Ödeme Gerçekleşmedi")]
         unpaid=1,
         [Description("Yolda")]
         onway=2,

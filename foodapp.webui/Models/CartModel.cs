@@ -6,13 +6,13 @@ namespace foodapp.webui.Models
     public class CartModel
     {
         public int CartId { get; set; }
-        public double CargoPrice { get; set; }=7.00;
+        public decimal CargoPrice { get; set; }=7.00m;
         public List<CartItemModel> CartItems { get; set; }
-        public double CartTotal()
+        public decimal CartTotal()
         {
-           return (double)CartItems.Sum(i=>i.Price*i.Quantity);
+           return (decimal)CartItems.Sum(i=>i.Price*i.Quantity);
         }
-        public double TotalPrice()
+        public decimal TotalPrice()
         {
             return CargoPrice+CartTotal();
         }
@@ -23,7 +23,7 @@ namespace foodapp.webui.Models
         public int CartItemId { get; set; }
         public int ProductId { get; set; }
         public string Name { get; set; }
-        public double? Price { get; set; }
+        public decimal? Price { get; set; }
         public string ImageUrl { get; set; }
         public int Quantity { get; set; }
         public string CategoryName { get; set; }

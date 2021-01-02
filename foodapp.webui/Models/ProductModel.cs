@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using foodapp.entity;
 
 namespace foodapp.webui.Models
@@ -13,8 +14,8 @@ namespace foodapp.webui.Models
         public string Name { get; set; }
         [Display(Name="Ürün Fiyatı (₺) ",Prompt="3.500")]
         [Required(ErrorMessage="Ürün Fiyatı girilmelidir.")]
-        [DataType(DataType.Currency,ErrorMessage="Ürün fiyatı sayı tipinde olmalıdır.")]
-        public double? Price { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0.###}",ApplyFormatInEditMode = true)]
+        public decimal Price { get; set; }
         [Display(Name="Onaylı mı?",Prompt="Hayır")]
         public bool IsApproved { get; set; }
         [Display(Name="Kategori Numarası",Prompt="1")]

@@ -68,8 +68,8 @@ namespace foodapp.webui.Models
         [Display(Name="Alınan Ürünler")]
 
         public List<OrderItemModel> OrderItems{get; set;}
-        public double CargoPrice { get; set; }
-        public double OrderTotal()
+        public decimal CargoPrice { get; set; }
+        public decimal OrderTotal()
         {
             return OrderItems.Sum(i=>i.Price*i.Quantity)+CargoPrice;
         }
@@ -81,7 +81,8 @@ namespace foodapp.webui.Models
     {
         public int OrderItemId { get; set; }
         public string ProductName { get; set; }
-        public double Price { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0.###}",ApplyFormatInEditMode = true)]
+        public decimal Price { get; set; }
         public int Quantity { get; set; }
         public string ImageUrl { get; set; }
     }

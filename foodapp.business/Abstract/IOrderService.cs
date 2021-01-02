@@ -8,6 +8,7 @@ namespace foodapp.business.Abstract
         void Create(Order entity);
         List<Order> GetOrders(string userId);
         List<Order> GetAllOrders();
+        void Update(Order entity);
         
     }
 }

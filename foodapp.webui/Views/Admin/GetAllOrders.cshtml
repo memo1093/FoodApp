@@ -179,18 +179,25 @@
                     <h4>@order.FirstName @order.LastName | #@order.OrderNumber</h4>
                     <div>
                         
+                        <form asp-action="ChangeOrderState" asp-controller="admin" method="post" style="display: inline;">
+                            <input type="hidden" value="@order.OrderId" name="orderId" id="orderId-@order.OrderId">
+                                <div class="btn-group m-4" role="group">
+
                             @foreach (var orderState in ViewBag.EnumOrderValues)
                                 {
-                                    <form asp-action="ChangeOrderState" asp-controller="admin" method="post" style="display: inline;">
                                     
-                                    <input type="hidden" value="@orderState" name="orderState" id="State-@orderState">
-                                    <input type="hidden" value="@order.OrderId" name="orderId" id="orderId-@order.OrderId">
-                                        <button class="btn btn-warning m-4" type="submit"  id="orderStateButton-@orderState">@orderState</button>
-                                
-                                    </form>  
+                                        <button class="btn @(orderState.Equals(EnumOrderState.waiting)?"btn-warning":
+                        orderState.Equals(EnumOrderState.unpaid)?"btn-danger":
+                        orderState.Equals(EnumOrderState.onway)?"btn-secondary":
+                        orderState.Equals(EnumOrderState.completed)?"btn-success":"")" name="orderState" type="submit" id="orderStateButton-@orderState" value="@orderState">
+                                            @EnumStringValueExtension.GetDescription(orderState) 
+                                        </button>
+                                    
+                                    
                                     
                                 }
-                            
+                                </div>
+                        </form>      
                         </div>
                 </div>
             <div class="card-body">

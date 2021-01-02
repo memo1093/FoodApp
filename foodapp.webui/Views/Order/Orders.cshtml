@@ -37,8 +37,11 @@
                 <tr>
                     <td colspan="2">Alıcının Adı Soyadı</td>
                     <td>@order.FirstName @order.LastName</td>
-                    <td rowspan="5">Toplam: @order.OrderTotal() TL</td>
-                    <td rowspan="5">
+                    <td rowspan="5" class="font-weight-bold">Toplam: @order.OrderTotal() TL</td>
+                    <td rowspan="5" class=@(order.OrderState.Equals(EnumOrderState.waiting)?"text-warning":
+                        order.OrderState.Equals(EnumOrderState.unpaid)?"text-danger":
+                        order.OrderState.Equals(EnumOrderState.onway)?"text-secondary":
+                        order.OrderState.Equals(EnumOrderState.completed)?"text-success":"")>
                         @order.OrderStateName
                     </td>
 

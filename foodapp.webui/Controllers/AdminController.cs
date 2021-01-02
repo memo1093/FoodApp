@@ -56,7 +56,7 @@ namespace foodapp.webui.Controllers
                 {
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = $"{model.Name} rolü başarıyla eklendi.",
+                        Title = $"",
                         Message = $"{model.Name} rolü başarıyla eklendi.",
                         AlertType = "alert-success"
                     });
@@ -74,7 +74,7 @@ namespace foodapp.webui.Controllers
             }
             TempData.Put("message", new AlertMessage
             {
-                Title = $"{model.Name} rolü eklenemedi.",
+                Title = $"",
                 Message = $"{model.Name} rolü eklenemedi.",
                 AlertType = "alert-secondary"
             });
@@ -198,7 +198,7 @@ namespace foodapp.webui.Controllers
                     {
                         TempData.Put("message", new AlertMessage
                         {
-                            Title = "Kullanıcı Güncelleme",
+                            Title = "",
                             Message = "Kullanıcı Güncelleme işlemi başarılı",
                             AlertType = "alert-success"
                         });
@@ -268,7 +268,7 @@ namespace foodapp.webui.Controllers
                 {
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = $"{entity.Name} adlı ürün başarıyla eklendi",
+                        Title = $"Ürün Ekleme",
                         Message = $"{entity.Name} adlı ürün başarıyla eklendi",
                         AlertType = "alert-success"
                     });
@@ -346,7 +346,7 @@ namespace foodapp.webui.Controllers
                 {
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = "Ürün kategorisi seçmelisiniz.",
+                        Title = "",
                         Message = "Ürün kategorisi seçmelisiniz.",
 
                     });
@@ -359,7 +359,7 @@ namespace foodapp.webui.Controllers
                 {
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = $"{entity.Name} isimli ürün başarıyla güncellendi.",
+                        Title = $"Ürün Güncelleme",
                         Message = $"{entity.Name} isimli ürün başarıyla güncellendi.",
                         AlertType = "alert-success"
 
@@ -389,7 +389,7 @@ namespace foodapp.webui.Controllers
             {
                 TempData.Put("message", new AlertMessage
                 {
-                    Title = $"{entity.Name} adında ürün yok.",
+                    Title = $"",
                     Message = $"{entity.Name} adında ürün yok.",
 
                 });
@@ -400,7 +400,7 @@ namespace foodapp.webui.Controllers
                 {
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = $"{entity.Name} isimli ürün silindi.",
+                        Title = $"Ürün Silme",
                         Message = $"{entity.Name} isimli ürün silindi."
 
                     });
@@ -435,7 +435,7 @@ namespace foodapp.webui.Controllers
                     _productService.Update(entity);
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = $"{entity.Name} isimli ürünün onayı kaldırıldı.",
+                        Title = $"Onay Durumu",
                         Message = $"{entity.Name} isimli ürünün onayı kaldırıldı.",
                         AlertType = "alert-warning"
                     });
@@ -447,7 +447,7 @@ namespace foodapp.webui.Controllers
                     _productService.Update(entity);
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = $"{entity.Name} isimli ürün başarıyla onaylandı.",
+                        Title = $"Onay Durumu",
                         Message = $"{entity.Name} isimli ürün başarıyla onaylandı.",
                         AlertType = "alert-warning"
                     });
@@ -457,7 +457,7 @@ namespace foodapp.webui.Controllers
             }
             TempData.Put("message", new AlertMessage
             {
-                Title = $"{entity.Name} isimli ürün onay sorunu.",
+                Title = $"",
                 Message = $"{entity.Name} isimli ürün onayı başarısız oldu! Ürün kayıtlı olmayabilir ya da ait olduğu bir kategorisi yok.",
                 AlertType = "alert-danger"
             });
@@ -517,7 +517,7 @@ namespace foodapp.webui.Controllers
                 {
                     TempData.Put("message", new AlertMessage
                     {
-                        Title = $"{entity.Name} Kategori tipi başarıyla eklendi",
+                        Title = $"Kategori Tipi",
                         Message = $"{entity.Name} Kategori tipi başarıyla eklendi",
                         AlertType = "alert-success"
                     });
@@ -596,7 +596,7 @@ namespace foodapp.webui.Controllers
 
                 TempData.Put("message", new AlertMessage
                 {
-                    Title = $"{entity.Name} Kategori tipi başarıyla güncellendi",
+                    Title = $"Kategori Güncelleme",
                     Message = $"{entity.Name} Kategori tipi başarıyla güncellendi",
                     AlertType = "alert-success"
                 });
@@ -630,7 +630,7 @@ namespace foodapp.webui.Controllers
             _categoryService.Delete(category);
             TempData.Put("message", new AlertMessage
             {
-                Title = $"{category.Name} Kategori tipi ve içerdiği ürünler silindi",
+                Title = $"Kategori Silme",
                 Message = $"{category.Name} Kategori tipi ve içerdiği ürünler silindi",
 
             });
@@ -658,7 +658,7 @@ namespace foodapp.webui.Controllers
                 orderModel.Phone = order.Phone;
                 orderModel.Email = order.Email;
                 orderModel.PaymentType = order.PaymentType;
-                
+
 
 
 
@@ -669,7 +669,7 @@ namespace foodapp.webui.Controllers
                     Price = i.Price,
                     Quantity = i.Quantity,
                     ImageUrl = i.Product.ImageUrl
-                    
+
 
                 }).ToList();
 
@@ -691,6 +691,7 @@ namespace foodapp.webui.Controllers
         {
 
 
+
             var orders = _orderService.GetAllOrders();
             var orderListModel = new List<OrderListModel>();
             OrderListModel orderModel;
@@ -699,14 +700,31 @@ namespace foodapp.webui.Controllers
                 orderModel = new OrderListModel();
                 if (order.OrderId == orderId)
                 {
-                    var enumVals = new List<object>();
-
 
                     Enum.Parse(typeof(EnumOrderState), orderState);
+                    switch (orderState)
+                    {
+                        case "waiting":
+                            order.OrderState = EnumOrderState.waiting;
+                            break;
+                        case "unpaid":
+                            order.OrderState = EnumOrderState.unpaid;
+                            break;
+                        case "onway":
+                            order.OrderState = EnumOrderState.onway;
+                            break;
+                        case "completed":
+                            order.OrderState = EnumOrderState.completed;
+                            break;
+
+                    
+                    }
+                    
 
                 }
                 orderModel.OrderId = order.OrderId;
                 orderModel.OrderNumber = order.OrderNumber;
+
                 orderModel.OrderState = order.OrderState;
                 orderModel.OrderDate = order.OrderDate;
                 orderModel.FirstName = order.FirstName;
@@ -726,16 +744,17 @@ namespace foodapp.webui.Controllers
                     ImageUrl = i.Product.ImageUrl
 
                 }).ToList();
+                _orderService.Update(order);
 
 
-
-                ViewBag.EnumOrderValues = Enum.GetValues(typeof(EnumOrderState));
+                ViewBag.EnumOrderValues = Enum.GetNames(typeof(EnumOrderState));
 
 
 
                 orderListModel.Add(orderModel);
+                
             }
-            return View("GetAllOrders", orderListModel);
+            return RedirectToAction("GetAllOrders", orderListModel);
 
         }
         public EnumOrderState GetOrderState(string orderState)
@@ -754,7 +773,7 @@ namespace foodapp.webui.Controllers
         }
 
 
-       
+
 
 
 

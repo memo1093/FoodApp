@@ -38,7 +38,7 @@
                                   <a asp-controller="admin"
                               asp-action="products" class="dropdown-item">Ürün Listesi</a>
                               <a asp-controller="admin" asp-action="categories" class="dropdown-item">Kategori Listesi</a>
-                                  <a href="admin/orders/all" class="dropdown-item">Sipariş Listesi</a>
+                                  <a asp-controller="Admin" asp-action="GetAllOrders" class="dropdown-item">Sipariş Listesi</a>
                               }
                               if (User.IsInRole("master"))
                               {

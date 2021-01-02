@@ -40,6 +40,11 @@ namespace foodapp.data.Concrete.EfCore
                                             .HasForeignKey(c=>c.CategoryId)
                                             .IsRequired()
                                             .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Product>().Property(i=>i.Price).HasColumnType("decimal(10,2)").IsRequired();
+            builder.Entity<OrderItem>().Property(i=>i.Price).HasColumnType("decimal(10,2)").IsRequired();
+            builder.Entity<Cart>().Property(i=>i.CargoPrice).HasColumnType("decimal(10,2)").IsRequired();
+            
             
              
         }

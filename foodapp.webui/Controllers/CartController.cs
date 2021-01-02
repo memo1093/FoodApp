@@ -48,7 +48,6 @@ namespace foodapp.webui.Controllers
                     
                     
                 }).ToList(),
-                CargoPrice=7.000
             });
         }
         [HttpPost]
@@ -104,7 +103,6 @@ namespace foodapp.webui.Controllers
                     Quantity = i.Quantity,
 
                 }).ToList(),
-                CargoPrice=7.000
 
             };
 
@@ -140,6 +138,8 @@ namespace foodapp.webui.Controllers
             paymentCard.RegisterCard = 0;
             request.PaymentCard = paymentCard;
 
+
+//---------Card number for try ------------------------//
             // paymentCard.CardNumber = "5528790000000008";
             // paymentCard.ExpireMonth = "12";
             // paymentCard.ExpireYear = "2030";
@@ -152,8 +152,7 @@ namespace foodapp.webui.Controllers
             buyer.GsmNumber ="+90"+ model.Phone;
             buyer.Email = model.Email;
             buyer.IdentityNumber ="Tc Kimlik No İstenmiyor.";
-            // buyer.LastLoginDate = "2015-10-05 12:43:35";
-            // buyer.RegistrationDate = "2013-04-21 15:12:09";
+           
             buyer.RegistrationAddress = model.Address;
             buyer.Ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
             buyer.City = model.City;
@@ -290,7 +289,7 @@ namespace foodapp.webui.Controllers
             {
                 var orderItem = new entity.OrderItem()
                 {
-                    Price = (double)item.Price,
+                    Price = (decimal)item.Price,
                     Quantity = item.Quantity,
                     ProductId = item.ProductId,
                 };

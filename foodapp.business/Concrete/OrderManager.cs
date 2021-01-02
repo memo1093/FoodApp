@@ -28,5 +28,10 @@ namespace foodapp.business.Concrete
         {
             return _orderRepository.GetOrder(userId);
         }
+
+        public void Update(Order entity)
+        {
+            _orderRepository.Update(entity);
+        }
     }
 }

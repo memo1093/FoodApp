@@ -202,7 +202,7 @@ namespace foodapp.webui.Controllers
             {
                 TempData.Put("message", new AlertMessage
                     {
-                        Title = "Yanlış link",
+                        Title = "",
                         Message = $"Yanlış link bilgisi. Lütfen linkin bizim tarafımızca gönderildiğinden emin olun",
                         AlertType = "alert-warning"
                     });
