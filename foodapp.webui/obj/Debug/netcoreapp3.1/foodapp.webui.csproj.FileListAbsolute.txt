@@ -1,6 +1,5 @@
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\foodapp.webui.exe
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\foodapp.webui.deps.json
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\bin\Debug\netcoreapp3.1\foodapp.webui.runtimeconfig.json
@@ -104,3 +103,4 @@ C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Order\Orders.cshtml.g.cs
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Admin\GetAllOrders.cshtml.g.cs
 C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_warning2.cshtml.g.cs
+C:\Users\pc\Desktop\Website\FoodApp\FoodApp\foodapp.webui\obj\Debug\netcoreapp3.1\scopedcss\bundle\foodapp.webui.styles.css
