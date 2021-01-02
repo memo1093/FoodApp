@@ -25,6 +25,7 @@ You can change everything in database but you can delete or update orders(order 
 
 
 If you want to application membership system you need go to appsettings.json and then change these fields in "EmailSender"
+
 *Note: You can use any email when you will be a member but if you want to send emails, email sender just supports @windowslive.com and @hotmail.com.
 
 ![Alt Text](https://i.ibb.co/hsb0xpm/emailsender.jpg)
