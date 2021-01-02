@@ -6,7 +6,12 @@ This uses Entityframework.Core 3.1.403
 
 # Usage
 
-You can pull repository and can be use with ready components. Project has ready all roles(admin/master/user) account. Admin account is:
+You can pull repository and can be use with ready components. First you need to write console this Efcore commands for create database. 
+
+dotnet ef database update -s ../foodapp.webui --context FoodContext
+
+
+Project already has account member for all roles(admin/master/user) account. This account is:
 
 username : foodapp_admin
 password : Foodapp_159357456
@@ -20,9 +25,12 @@ You can change everything in database but you can delete or update orders(order 
 
 
 If you want to application membership system you need go to appsettings.json and then change these fields in "EmailSender"
-# Note: You can use any email when you will be a member but if you want to send emails, email sender just supports @windowslive.com and @hotmail.com.
+*Note: You can use any email when you will be a member but if you want to send emails, email sender just supports @windowslive.com and @hotmail.com.
 
 ![Alt Text](https://i.ibb.co/hsb0xpm/emailsender.jpg)
+
+
+
 
 
 
